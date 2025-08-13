@@ -1,5 +1,0 @@
----
-title: "Microtus_arvalis_Project"
----
-
-This project explores the genomics of *Microtus arvalis* on isolated islands.
