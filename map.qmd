@@ -218,7 +218,4 @@ map <- map %>%
 ```
 
 ```{r}
-#| warning: false
-#| message: false
-
 map
