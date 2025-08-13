@@ -1,0 +1,22 @@
+project:
+  type: website
+
+website:
+  title: "*𝘔𝘪𝘤𝘳𝘰𝘵𝘶𝘴 𝘢𝘳𝘷𝘢𝘭𝘪𝘴* Project"
+  navbar:
+    left:
+      - href: map.qmd
+        text: Sample map
+
+format:
+  html:
+    page-layout: full
+    code-fold: true
+    code-summary: "Show the code"
+    theme:
+      - cosmo
+      - brand
+    css: styles.css
+    toc: true
+
+editor: visual
