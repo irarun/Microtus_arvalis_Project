@@ -24,13 +24,13 @@ library(writexl)
 ### prepearing the data
 
 # convert lines to UTF-8 (replacing problematic chars)
-raw_lines <- readLines("onlyMicrotus_samplesV426.txt", encoding = "latin1")
+raw_lines <- readLines("onlyMicrotus_B_MicrotusSamplesV426.txt", encoding = "latin1")
 clean_lines <- iconv(raw_lines, from = "latin1", to = "UTF-8", sub = "")
 
 # Save cleaned file
-writeLines(clean_lines, "onlyMicrotus_samplesV426.txt")
+writeLines(clean_lines, "onlyMicrotus_B_MicrotusSamplesV426.txt")
 
-rawTable <- read_tsv("onlyMicrotus_samplesV426.txt")
+rawTable <- read_tsv("onlyMicrotus_B_MicrotusSamplesV426.txt")
   #col_types = cols(
     #Add = col_character(),
     #Published = col_character(),
