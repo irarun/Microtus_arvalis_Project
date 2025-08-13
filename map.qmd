@@ -1,5 +1,5 @@
 ---
-title: "map"
+title: "Sample map"
 format: html
 ---
 
@@ -217,5 +217,7 @@ map <- map %>%
     opacity = 1)
 ```
 
+
 ```{r}
 map
+```
