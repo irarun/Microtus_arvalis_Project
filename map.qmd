@@ -25,16 +25,18 @@ library(writexl)
 
 # convert lines to UTF-8 (replacing problematic chars)
 raw_lines <- readLines("onlyMicrotus_B_MicrotusSamplesV426.txt", encoding = "latin1")
+
 clean_lines <- iconv(raw_lines, from = "latin1", to = "UTF-8", sub = "")
 
 # Save cleaned file
-writeLines(clean_lines, "onlyMicrotus_B_MicrotusSamplesV426.txt")
+writeLines(clean_lines, "onlyMicrotus_B_MicrotusSamplesV426_cleaned.txt")
 
-rawTable <- read_tsv("onlyMicrotus_B_MicrotusSamplesV426.txt")
+rawTable <- read_tsv("onlyMicrotus_B_MicrotusSamplesV426_cleaned.txt")
   #col_types = cols(
     #Add = col_character(),
     #Published = col_character(),
     #.default = col_guess()) # let other columns be guessed
+
 
 #nrow(rawTable)
 #colnames(rawTable)
@@ -59,7 +61,8 @@ arvalis_data$Latitude  <- as.numeric(as.character(arvalis_data$Latitude))
 add_samples <- c("MarFSi01","MarFSJ456", "MarFTr01","MarFCm04",
                  "MarFCm01","MarFM05",
                  "MarGBGGo01","MarGBGCh01","MarGBGAt04","MarGBGAe01", 
-                 "MarFFo01", "MarFBe01", "MarFVi01")
+                 "MarFFo01", "MarFBe01", "MarFVi01",
+                 "MarOMDo01", "MarOMGr01", "MarOMSw01", "MarOMWr01", "MarOMPs01")
 
 # already published samples
 WangHeckel2025 <- c("BSt095", "BVe061", "FBv02", "FCc02", "FDa504", "FFr549", "FGr14",
@@ -216,7 +219,6 @@ map <- map %>%
     title = "Sample ID color legend",
     opacity = 1)
 ```
-
 
 ```{r}
 map
