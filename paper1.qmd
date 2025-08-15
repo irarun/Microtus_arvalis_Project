@@ -1,0 +1,388 @@
+---
+title: "1st paper"
+---
+
+The map below shows the geographic distribution of samples selected for the first round of sequencing.
+
+```{r}
+#| warning: false
+#| message: false
+#| results: 'hide'
+
+library(leaflet)
+library(leaflet.minicharts)
+library(widgetframe)
+library(sf)
+library(readr)
+library(dplyr)
+library(RColorBrewer)
+library(xfun)
+library(writexl)
+library(tidyverse)
+
+# Read and clean
+raw_lines <- readLines("onlyMicrotus_B_MicrotusSamplesV426.txt", encoding = "latin1")
+clean_lines <- iconv(raw_lines, from = "latin1", to = "UTF-8", sub = "")
+writeLines(clean_lines, "onlyMicrotus_B_MicrotusSamplesV426_cleaned.txt")
+rawTable <- read_tsv("onlyMicrotus_B_MicrotusSamplesV426_cleaned.txt")
+
+# Columns to use
+cols <- c("Genus", "Species", "Samplinglocation", "Country", "Sample number (on tube or bag)",
+          "Individual number", "Extraction y/n?", "Place of capture", "Latitude", "Longitude",
+          "Specimen-20", "DNADNA_.Number.in..20", "RNARNA_.Number.in..80")
+Data <- rawTable[, cols]
+
+# Filter species
+arvalis_data <- Data %>% filter(Species == "arvalis")
+
+# Clean coordinates
+arvalis_data$Longitude <- gsub("\u00A0", "", arvalis_data$Longitude)
+arvalis_data$Latitude <- gsub("\u00A0", "", arvalis_data$Latitude)
+arvalis_data$Longitude <- as.numeric(as.character(arvalis_data$Longitude))
+arvalis_data$Latitude <- as.numeric(as.character(arvalis_data$Latitude))
+
+# Sample lists
+add_samples <- c("MarGBGGo01","MarGBGCh01","MarGBGAe01", # Guernsey
+                 "MarFFo01", "MarFBe01", "MarFVi01", "MarFSJ455", "MarFSi01", # continent
+                 "MarOMDo01") # Orkney
+
+WangHeckel2025 <- c("BSt095", "BVe061", "FBv02", "FCc02", "FDa504", "FFr549", "FGr14",
+                    "FMc03", "FOg02", "FPi555", "FSt24", "OBSO234", "OBWs01",
+                    "OEOs14", "OEOs15", "OMBr149", "OMHo277", "ORGs21", "ORWa268",
+                    "OSaLi257", "OSaNe01", "OSJC01", "OSWi166", "OWLs033", "OWPg01")
+
+Wang2023 <- c("BSt095", "BVe061", "FDa504", "FFr549", "FMc03", "FPi555", "Ft24",
+              "FA01", "FCh05", "FTh497", "EMq03", "ESa08", "ESAv05", "FM05", "OBSO234",
+              "OBWs01", "OBWs02", "OEOs14", "OEOs15", "OMBr149", "OMHo277", "OMSe194",
+              "OMSO221", "OMSQ273", "ORGs21", "ORNe205", "ORWa268", "OSaLi257", "OSaNe01",
+              "OSaWh256", "OSGr134", "OSJC01", "OSWi166", "OWLs033", "OWNe051", "OWPg01",
+              "CHBo17", "CHVa02", "ISc01", "CZD02", "PSr06", "RuKo01", "DAb06", "DWa04", "He42")
+
+published <- unique(c(WangHeckel2025, Wang2023))
+published <- paste0("Mar", published)
+
+# Mark published and to-add samples
+arvalis_data <- arvalis_data %>%
+  mutate(
+    Published = `Individual number` %in% published,
+    Add_marked = `Individual number` %in% add_samples
+  )
+
+# Assign color based on country group
+arvalis_data <- arvalis_data %>%
+  mutate(
+    Country_group_color = case_when(
+      Country %in% c("Spain", "France", "Belgien", "Orkney Island", "Britain") ~ "green",
+      Country %in% c("Switzerland", "Italy") ~ "darkblue",
+      Country %in% c("Russia", "Czech Republic", "Poland") ~ "orange",
+      TRUE ~ "darkred"
+    )
+  )
+
+
+# Summarise coordinates
+coords_summary <- arvalis_data %>%
+  filter(!is.na(Latitude), !is.na(Longitude)) %>%
+  group_by(Longitude, Latitude) %>%
+  summarise(
+    sample_count = n(),
+    countries = paste(unique(Country), collapse = ", "),
+    Location = first(Samplinglocation),
+    color = first(Country_group_color),
+    has_add_sample = any(Add_marked),
+    has_published = any(Published),
+    samples_info = list(
+      tibble(
+        sample_name = `Individual number`,
+        Frozen_body = `Specimen-20`
+      )
+    ),
+    .groups = "drop"
+  ) %>%
+  rowwise() %>%
+  mutate(
+    samples_colored = paste(
+      sapply(1:nrow(samples_info), function(i) {
+        color_sample_name(samples_info$sample_name[i], samples_info$Frozen_body[i])
+      }),
+      collapse = "<br>"
+    )
+  ) %>%
+  ungroup()
+
+# Create leaflet map
+map <- leaflet() %>%
+  addTiles() %>%
+  setView(lat = mean(coords_summary$Latitude), lng = mean(coords_summary$Longitude), zoom = 5)
+
+
+# Add published samples as circles
+map <- map %>%
+  addCircleMarkers(
+    data = coords_summary %>% filter(has_published),
+    lng = ~Longitude,
+    lat = ~Latitude,
+    color = ~color,
+    radius = 6,
+    weight = 1,
+    opacity = 1,
+    fillOpacity = 1,
+    label = ~Location,
+    popup = ~paste0(
+      "<b>Coordinates:</b> ", Latitude, ", ", Longitude, "<br>",
+      "<b>Samples at this location:</b> ", sample_count, "<br>",
+      "<b>Countries:</b> ", countries, "<br>",
+      "<b>Location:</b> ", Location, "<br>",
+      "<b>Sample IDs:</b><br>", samples_colored
+    )
+  )
+
+
+small_icon <- makeIcon(
+  iconUrl = "https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-green.png",
+  shadowUrl = "https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-shadow.png",
+  iconWidth = 15,   # smaller width (default is 25)
+  iconHeight = 25,  # smaller height (default is 41)
+  iconAnchorX = 7,  # adjust anchor point accordingly (usually half of width)
+  iconAnchorY = 25  # usually equals iconHeight
+)
+
+
+
+# Add add-marked samples as colored markers with popups (no rectangles)
+# We'll use leaflet icons matching colors for markers
+marker_icons <- list(
+  green = makeIcon(iconUrl = "https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-green.png", iconWidth = 15, iconHeight = 25, iconAnchorX = 7, iconAnchorY = 25),
+  blue = makeIcon(iconUrl = "https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-blue.png", iconWidth = 15, iconHeight = 25, iconAnchorX = 7, iconAnchorY = 25),
+  yellow = makeIcon(iconUrl = "https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-yellow.png", iconWidth = 15, iconHeight = 25, iconAnchorX = 7, iconAnchorY = 25),
+  black = makeIcon(iconUrl = "https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-black.png", iconWidth = 15, iconHeight = 25, iconAnchorX = 7, iconAnchorY = 25))
+
+add_sample_points <- coords_summary %>% filter(has_add_sample)
+
+for (i in seq_len(nrow(add_sample_points))) {
+  col <- add_sample_points$color[i]
+  icon <- marker_icons[[col]]
+  popup_html <- paste0(
+    "<b>Coordinates:</b> ", add_sample_points$Latitude[i], ", ", add_sample_points$Longitude[i], "<br>",
+    "<b>Samples at this location:</b> ", add_sample_points$sample_count[i], "<br>",
+    "<b>Countries:</b> ", add_sample_points$countries[i], "<br>",
+    "<b>Location:</b> ", add_sample_points$Location[i], "<br>",
+    "<b>Sample IDs:</b><br>", add_sample_points$samples_colored[i]
+  )
+  map <- addMarkers(
+    map,
+    lng = add_sample_points$Longitude[i],
+    lat = add_sample_points$Latitude[i],
+    icon = icon,
+    popup = popup_html,
+    label = add_sample_points$Location[i]
+  )
+}
+
+# Add legend manually
+map <- map %>%
+  addLegend(
+    position = "bottomleft",
+    colors = c("green", "darkblue", "orange", "darkred"),
+    labels = c("Spain/France/Belgien/Britain", "Switzerland/Italy", "Russia/Czech/Poland", "Other"),
+    title = "Country color",
+    opacity = 1
+  )
+```
+
+```{r}
+map
+```
+
+The map below shows the geographic distribution of samples selected for the first round of sequencing, as well as those potentially intended for a second round (to be updated).
+
+```{r}
+#| warning: false
+#| message: false
+#| results: 'hide'
+
+library(leaflet)
+library(leaflet.minicharts)
+library(widgetframe)
+library(sf)
+library(readr)
+library(dplyr)
+library(RColorBrewer)
+library(xfun)
+library(writexl)
+library(tidyverse)
+
+# Read and clean
+raw_lines <- readLines("onlyMicrotus_B_MicrotusSamplesV426.txt", encoding = "latin1")
+clean_lines <- iconv(raw_lines, from = "latin1", to = "UTF-8", sub = "")
+writeLines(clean_lines, "onlyMicrotus_B_MicrotusSamplesV426_cleaned.txt")
+rawTable <- read_tsv("onlyMicrotus_B_MicrotusSamplesV426_cleaned.txt")
+
+# Columns to use
+cols <- c("Genus", "Species", "Samplinglocation", "Country", "Sample number (on tube or bag)",
+          "Individual number", "Extraction y/n?", "Place of capture", "Latitude", "Longitude",
+          "Specimen-20", "DNADNA_.Number.in..20", "RNARNA_.Number.in..80")
+Data <- rawTable[, cols]
+
+# Filter species
+arvalis_data <- Data %>% filter(Species == "arvalis")
+
+# Clean coordinates
+arvalis_data$Longitude <- gsub("\u00A0", "", arvalis_data$Longitude)
+arvalis_data$Latitude <- gsub("\u00A0", "", arvalis_data$Latitude)
+arvalis_data$Longitude <- as.numeric(as.character(arvalis_data$Longitude))
+arvalis_data$Latitude <- as.numeric(as.character(arvalis_data$Latitude))
+
+# Sample lists
+add_samples <- c("MarGBGGo01","MarGBGCh01","MarGBGAe01", # Guernsey
+                 "MarFFo01", "MarFBe01", "MarFVi01", "MarFSJ455", "MarFSi01",
+                 "MarFTh478", # continent
+                 "MarOMDo01", "MarOMSw01", "MarOMWr01", "MarOMPs01") # Orkney
+
+WangHeckel2025 <- c("BSt095", "BVe061", "FBv02", "FCc02", "FDa504", "FFr549", "FGr14",
+                    "FMc03", "FOg02", "FPi555", "FSt24", "OBSO234", "OBWs01",
+                    "OEOs14", "OEOs15", "OMBr149", "OMHo277", "ORGs21", "ORWa268",
+                    "OSaLi257", "OSaNe01", "OSJC01", "OSWi166", "OWLs033", "OWPg01")
+
+Wang2023 <- c("BSt095", "BVe061", "FDa504", "FFr549", "FMc03", "FPi555", "Ft24",
+              "FA01", "FCh05", "FTh497", "EMq03", "ESa08", "ESAv05", "FM05", "OBSO234",
+              "OBWs01", "OBWs02", "OEOs14", "OEOs15", "OMBr149", "OMHo277", "OMSe194",
+              "OMSO221", "OMSQ273", "ORGs21", "ORNe205", "ORWa268", "OSaLi257", "OSaNe01",
+              "OSaWh256", "OSGr134", "OSJC01", "OSWi166", "OWLs033", "OWNe051", "OWPg01",
+              "CHBo17", "CHVa02", "ISc01", "CZD02", "PSr06", "RuKo01", "DAb06", "DWa04", "He42")
+
+published <- unique(c(WangHeckel2025, Wang2023))
+published <- paste0("Mar", published)
+
+# Mark published and to-add samples
+arvalis_data <- arvalis_data %>%
+  mutate(
+    Published = `Individual number` %in% published,
+    Add_marked = `Individual number` %in% add_samples
+  )
+
+# Assign color based on country group
+arvalis_data <- arvalis_data %>%
+  mutate(
+    Country_group_color = case_when(
+      Country %in% c("Spain", "France", "Belgien", "Orkney Island", "Britain") ~ "green",
+      Country %in% c("Switzerland", "Italy") ~ "darkblue",
+      Country %in% c("Russia", "Czech Republic", "Poland") ~ "orange",
+      TRUE ~ "darkred"
+    )
+  )
+
+
+# Summarise coordinates
+coords_summary <- arvalis_data %>%
+  filter(!is.na(Latitude), !is.na(Longitude)) %>%
+  group_by(Longitude, Latitude) %>%
+  summarise(
+    sample_count = n(),
+    countries = paste(unique(Country), collapse = ", "),
+    Location = first(Samplinglocation),
+    color = first(Country_group_color),
+    has_add_sample = any(Add_marked),
+    has_published = any(Published),
+    samples_info = list(
+      tibble(
+        sample_name = `Individual number`,
+        Frozen_body = `Specimen-20`
+      )
+    ),
+    .groups = "drop"
+  ) %>%
+  rowwise() %>%
+  mutate(
+    samples_colored = paste(
+      sapply(1:nrow(samples_info), function(i) {
+        color_sample_name(samples_info$sample_name[i], samples_info$Frozen_body[i])
+      }),
+      collapse = "<br>"
+    )
+  ) %>%
+  ungroup()
+
+# Create leaflet map
+map <- leaflet() %>%
+  addTiles() %>%
+  setView(lat = mean(coords_summary$Latitude), lng = mean(coords_summary$Longitude), zoom = 5)
+
+
+# Add published samples as circles
+map <- map %>%
+  addCircleMarkers(
+    data = coords_summary %>% filter(has_published),
+    lng = ~Longitude,
+    lat = ~Latitude,
+    color = ~color,
+    radius = 6,
+    weight = 1,
+    opacity = 1,
+    fillOpacity = 1,
+    label = ~Location,
+    popup = ~paste0(
+      "<b>Coordinates:</b> ", Latitude, ", ", Longitude, "<br>",
+      "<b>Samples at this location:</b> ", sample_count, "<br>",
+      "<b>Countries:</b> ", countries, "<br>",
+      "<b>Location:</b> ", Location, "<br>",
+      "<b>Sample IDs:</b><br>", samples_colored
+    )
+  )
+
+
+small_icon <- makeIcon(
+  iconUrl = "https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-green.png",
+  shadowUrl = "https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-shadow.png",
+  iconWidth = 15,   # smaller width (default is 25)
+  iconHeight = 25,  # smaller height (default is 41)
+  iconAnchorX = 7,  # adjust anchor point accordingly (usually half of width)
+  iconAnchorY = 25  # usually equals iconHeight
+)
+
+
+
+# Add add-marked samples as colored markers with popups (no rectangles)
+# We'll use leaflet icons matching colors for markers
+marker_icons <- list(
+  green = makeIcon(iconUrl = "https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-green.png", iconWidth = 15, iconHeight = 25, iconAnchorX = 7, iconAnchorY = 25),
+  blue = makeIcon(iconUrl = "https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-blue.png", iconWidth = 15, iconHeight = 25, iconAnchorX = 7, iconAnchorY = 25),
+  yellow = makeIcon(iconUrl = "https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-yellow.png", iconWidth = 15, iconHeight = 25, iconAnchorX = 7, iconAnchorY = 25),
+  black = makeIcon(iconUrl = "https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-black.png", iconWidth = 15, iconHeight = 25, iconAnchorX = 7, iconAnchorY = 25))
+
+add_sample_points <- coords_summary %>% filter(has_add_sample)
+
+for (i in seq_len(nrow(add_sample_points))) {
+  col <- add_sample_points$color[i]
+  icon <- marker_icons[[col]]
+  popup_html <- paste0(
+    "<b>Coordinates:</b> ", add_sample_points$Latitude[i], ", ", add_sample_points$Longitude[i], "<br>",
+    "<b>Samples at this location:</b> ", add_sample_points$sample_count[i], "<br>",
+    "<b>Countries:</b> ", add_sample_points$countries[i], "<br>",
+    "<b>Location:</b> ", add_sample_points$Location[i], "<br>",
+    "<b>Sample IDs:</b><br>", add_sample_points$samples_colored[i]
+  )
+  map <- addMarkers(
+    map,
+    lng = add_sample_points$Longitude[i],
+    lat = add_sample_points$Latitude[i],
+    icon = icon,
+    popup = popup_html,
+    label = add_sample_points$Location[i]
+  )
+}
+
+# Add legend manually
+map <- map %>%
+  addLegend(
+    position = "bottomleft",
+    colors = c("green", "darkblue", "orange", "darkred"),
+    labels = c("Spain/France/Belgien/Britain", "Switzerland/Italy", "Russia/Czech/Poland", "Other"),
+    title = "Country color",
+    opacity = 1
+  )
+```
+
+```{r}
+map
+```

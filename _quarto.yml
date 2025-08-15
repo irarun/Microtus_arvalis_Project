@@ -6,7 +6,9 @@ website:
   navbar:
     left:
       - href: map.qmd
-        text: Sample map
+        text: All samples
+      - href: paper1.qmd
+        text: 1st paper
 
 format:
   html:

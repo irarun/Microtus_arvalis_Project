@@ -1,5 +1,5 @@
 ---
-title: "Sample map"
+title: "All samples"
 format: html
 ---
 
