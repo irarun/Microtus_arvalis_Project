@@ -73,7 +73,7 @@ arvalis_data <- arvalis_data %>%
 arvalis_data <- arvalis_data %>%
   mutate(
     Country_group_color = case_when(
-      Country %in% c("Spain", "France", "Belgien", "Orkney Island", "Britain") ~ "green",
+      Country %in% c("Spain", "France", "Belgium", "Orkney Island", "Britain") ~ "green",
       Country %in% c("Switzerland", "Italy") ~ "darkblue",
       Country %in% c("Russia", "Czech Republic", "Poland") ~ "orange",
       TRUE ~ "darkred"
@@ -257,7 +257,7 @@ arvalis_data <- arvalis_data %>%
 arvalis_data <- arvalis_data %>%
   mutate(
     Country_group_color = case_when(
-      Country %in% c("Spain", "France", "Belgien", "Orkney Island", "Britain") ~ "green",
+      Country %in% c("Spain", "France", "Belgium", "Orkney Island", "Britain") ~ "green",
       Country %in% c("Switzerland", "Italy") ~ "darkblue",
       Country %in% c("Russia", "Czech Republic", "Poland") ~ "orange",
       TRUE ~ "darkred"
