@@ -1,0 +1,971 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.7.32">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>1st paper – Microtus arvalis Project</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-dfb324f25d9b1687192fa8be62ac8f9c.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<link href="site_libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet">
+
+<script src="site_libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
+
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+
+<link href="site_libs/leaflet-1.3.1/leaflet.css" rel="stylesheet">
+
+<script src="site_libs/leaflet-1.3.1/leaflet.js"></script>
+
+<link href="site_libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet">
+
+<script src="site_libs/proj4-2.6.2/proj4.min.js"></script>
+
+<script src="site_libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
+
+<link href="site_libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet">
+
+<script src="site_libs/leaflet-binding-2.2.2/leaflet.js"></script>
+
+
+
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title"><em>Microtus arvalis</em> Project</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="./map.html"> 
+<span class="menu-text">All samples</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link active" href="./paper1.html" aria-current="page"> 
+<span class="menu-text">1st paper</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+        
+    </div>
+<!-- main -->
+<main class="content column-page" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">1st paper</h1>
+</div>
+
+
+
+<div class="quarto-title-meta column-page">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>The map below shows the geographic distribution of samples selected for the first round of sequencing.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(leaflet)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(leaflet.minicharts)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(widgetframe)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sf)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(RColorBrewer)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(xfun)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(writexl)</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Read and clean</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>raw_lines <span class="ot">&lt;-</span> <span class="fu">readLines</span>(<span class="st">"onlyMicrotus_B_MicrotusSamplesV426.txt"</span>, <span class="at">encoding =</span> <span class="st">"latin1"</span>)</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>clean_lines <span class="ot">&lt;-</span> <span class="fu">iconv</span>(raw_lines, <span class="at">from =</span> <span class="st">"latin1"</span>, <span class="at">to =</span> <span class="st">"UTF-8"</span>, <span class="at">sub =</span> <span class="st">""</span>)</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="fu">writeLines</span>(clean_lines, <span class="st">"onlyMicrotus_B_MicrotusSamplesV426_cleaned.txt"</span>)</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>rawTable <span class="ot">&lt;-</span> <span class="fu">read_tsv</span>(<span class="st">"onlyMicrotus_B_MicrotusSamplesV426_cleaned.txt"</span>, <span class="at">locale =</span> <span class="fu">locale</span>(<span class="at">encoding =</span> <span class="st">"UTF-8"</span>))</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Columns to use</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>cols <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Genus"</span>, <span class="st">"Species"</span>, <span class="st">"Samplinglocation"</span>, <span class="st">"Country"</span>, <span class="st">"Sample number (on tube or bag)"</span>,</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>          <span class="st">"Individual number"</span>, <span class="st">"Extraction y/n?"</span>, <span class="st">"Place of capture"</span>, <span class="st">"Latitude"</span>, <span class="st">"Longitude"</span>,</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>          <span class="st">"Specimen-20"</span>, <span class="st">"DNADNA_.Number.in..20"</span>, <span class="st">"RNARNA_.Number.in..80"</span>)</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>Data <span class="ot">&lt;-</span> rawTable[, cols]</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Filter species</span></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>arvalis_data <span class="ot">&lt;-</span> Data <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Species <span class="sc">==</span> <span class="st">"arvalis"</span>)</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a><span class="co"># Clean coordinates</span></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>arvalis_data<span class="sc">$</span>Longitude <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="st">"\u00A0"</span>, <span class="st">""</span>, arvalis_data<span class="sc">$</span>Longitude)</span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>arvalis_data<span class="sc">$</span>Latitude <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="st">"\u00A0"</span>, <span class="st">""</span>, arvalis_data<span class="sc">$</span>Latitude)</span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>arvalis_data<span class="sc">$</span>Longitude <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">as.character</span>(arvalis_data<span class="sc">$</span>Longitude))</span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>arvalis_data<span class="sc">$</span>Latitude <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">as.character</span>(arvalis_data<span class="sc">$</span>Latitude))</span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a><span class="co"># Sample lists</span></span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>add_samples <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"MarGBGGo01"</span>,<span class="st">"MarGBGCh01"</span>,<span class="st">"MarGBGAe01"</span>, <span class="co"># Guernsey</span></span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>                 <span class="st">"MarFFo01"</span>, <span class="st">"MarFBe01"</span>, <span class="st">"MarFVi01"</span>, <span class="st">"MarFSJ455"</span>, <span class="st">"MarFSi01"</span>, <span class="co"># continent</span></span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>                 <span class="st">"MarOMDo01"</span>) <span class="co"># Orkney</span></span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>WangHeckel2025 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"BSt095"</span>, <span class="st">"BVe061"</span>, <span class="st">"FBv02"</span>, <span class="st">"FCc02"</span>, <span class="st">"FDa504"</span>, <span class="st">"FFr549"</span>, <span class="st">"FGr14"</span>,</span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>                    <span class="st">"FMc03"</span>, <span class="st">"FOg02"</span>, <span class="st">"FPi555"</span>, <span class="st">"FSt24"</span>, <span class="st">"OBSO234"</span>, <span class="st">"OBWs01"</span>,</span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>                    <span class="st">"OEOs14"</span>, <span class="st">"OEOs15"</span>, <span class="st">"OMBr149"</span>, <span class="st">"OMHo277"</span>, <span class="st">"ORGs21"</span>, <span class="st">"ORWa268"</span>,</span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a>                    <span class="st">"OSaLi257"</span>, <span class="st">"OSaNe01"</span>, <span class="st">"OSJC01"</span>, <span class="st">"OSWi166"</span>, <span class="st">"OWLs033"</span>, <span class="st">"OWPg01"</span>)</span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a>Wang2023 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"BSt095"</span>, <span class="st">"BVe061"</span>, <span class="st">"FDa504"</span>, <span class="st">"FFr549"</span>, <span class="st">"FMc03"</span>, <span class="st">"FPi555"</span>, <span class="st">"Ft24"</span>,</span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a>              <span class="st">"FA01"</span>, <span class="st">"FCh05"</span>, <span class="st">"FTh497"</span>, <span class="st">"EMq03"</span>, <span class="st">"ESa08"</span>, <span class="st">"ESAv05"</span>, <span class="st">"FM05"</span>, <span class="st">"OBSO234"</span>,</span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a>              <span class="st">"OBWs01"</span>, <span class="st">"OBWs02"</span>, <span class="st">"OEOs14"</span>, <span class="st">"OEOs15"</span>, <span class="st">"OMBr149"</span>, <span class="st">"OMHo277"</span>, <span class="st">"OMSe194"</span>,</span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a>              <span class="st">"OMSO221"</span>, <span class="st">"OMSQ273"</span>, <span class="st">"ORGs21"</span>, <span class="st">"ORNe205"</span>, <span class="st">"ORWa268"</span>, <span class="st">"OSaLi257"</span>, <span class="st">"OSaNe01"</span>,</span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a>              <span class="st">"OSaWh256"</span>, <span class="st">"OSGr134"</span>, <span class="st">"OSJC01"</span>, <span class="st">"OSWi166"</span>, <span class="st">"OWLs033"</span>, <span class="st">"OWNe051"</span>, <span class="st">"OWPg01"</span>,</span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a>              <span class="st">"CHBo17"</span>, <span class="st">"CHVa02"</span>, <span class="st">"ISc01"</span>, <span class="st">"CZD02"</span>, <span class="st">"PSr06"</span>, <span class="st">"RuKo01"</span>, <span class="st">"DAb06"</span>, <span class="st">"DWa04"</span>, <span class="st">"He42"</span>)</span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a>published <span class="ot">&lt;-</span> <span class="fu">unique</span>(<span class="fu">c</span>(WangHeckel2025, Wang2023))</span>
+<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a>published <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">"Mar"</span>, published)</span>
+<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a><span class="co"># Mark published and to-add samples</span></span>
+<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a>arvalis_data <span class="ot">&lt;-</span> arvalis_data <span class="sc">%&gt;%</span></span>
+<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a>    <span class="at">Published =</span> <span class="st">`</span><span class="at">Individual number</span><span class="st">`</span> <span class="sc">%in%</span> published,</span>
+<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a>    <span class="at">Add_marked =</span> <span class="st">`</span><span class="at">Individual number</span><span class="st">`</span> <span class="sc">%in%</span> add_samples</span>
+<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a><span class="co"># Assign color based on country group</span></span>
+<span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a>arvalis_data <span class="ot">&lt;-</span> arvalis_data <span class="sc">%&gt;%</span></span>
+<span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a>    <span class="at">Country_group_color =</span> <span class="fu">case_when</span>(</span>
+<span id="cb1-64"><a href="#cb1-64" aria-hidden="true" tabindex="-1"></a>      Country <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Spain"</span>, <span class="st">"France"</span>, <span class="st">"Belgien"</span>, <span class="st">"Orkney Island"</span>, <span class="st">"Britain"</span>) <span class="sc">~</span> <span class="st">"green"</span>,</span>
+<span id="cb1-65"><a href="#cb1-65" aria-hidden="true" tabindex="-1"></a>      Country <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Switzerland"</span>, <span class="st">"Italy"</span>) <span class="sc">~</span> <span class="st">"darkblue"</span>,</span>
+<span id="cb1-66"><a href="#cb1-66" aria-hidden="true" tabindex="-1"></a>      Country <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Russia"</span>, <span class="st">"Czech Republic"</span>, <span class="st">"Poland"</span>) <span class="sc">~</span> <span class="st">"orange"</span>,</span>
+<span id="cb1-67"><a href="#cb1-67" aria-hidden="true" tabindex="-1"></a>      <span class="cn">TRUE</span> <span class="sc">~</span> <span class="st">"darkred"</span></span>
+<span id="cb1-68"><a href="#cb1-68" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb1-69"><a href="#cb1-69" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb1-70"><a href="#cb1-70" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-71"><a href="#cb1-71" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-72"><a href="#cb1-72" aria-hidden="true" tabindex="-1"></a><span class="co"># Summarise coordinates</span></span>
+<span id="cb1-73"><a href="#cb1-73" aria-hidden="true" tabindex="-1"></a>coords_summary <span class="ot">&lt;-</span> arvalis_data <span class="sc">%&gt;%</span></span>
+<span id="cb1-74"><a href="#cb1-74" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(Latitude), <span class="sc">!</span><span class="fu">is.na</span>(Longitude)) <span class="sc">%&gt;%</span></span>
+<span id="cb1-75"><a href="#cb1-75" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Longitude, Latitude) <span class="sc">%&gt;%</span></span>
+<span id="cb1-76"><a href="#cb1-76" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb1-77"><a href="#cb1-77" aria-hidden="true" tabindex="-1"></a>    <span class="at">sample_count =</span> <span class="fu">n</span>(),</span>
+<span id="cb1-78"><a href="#cb1-78" aria-hidden="true" tabindex="-1"></a>    <span class="at">countries =</span> <span class="fu">paste</span>(<span class="fu">unique</span>(Country), <span class="at">collapse =</span> <span class="st">", "</span>),</span>
+<span id="cb1-79"><a href="#cb1-79" aria-hidden="true" tabindex="-1"></a>    <span class="at">Location =</span> <span class="fu">first</span>(Samplinglocation),</span>
+<span id="cb1-80"><a href="#cb1-80" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="fu">first</span>(Country_group_color),</span>
+<span id="cb1-81"><a href="#cb1-81" aria-hidden="true" tabindex="-1"></a>    <span class="at">has_add_sample =</span> <span class="fu">any</span>(Add_marked),</span>
+<span id="cb1-82"><a href="#cb1-82" aria-hidden="true" tabindex="-1"></a>    <span class="at">has_published =</span> <span class="fu">any</span>(Published),</span>
+<span id="cb1-83"><a href="#cb1-83" aria-hidden="true" tabindex="-1"></a>    <span class="at">sample_names =</span> <span class="fu">list</span>(<span class="st">`</span><span class="at">Individual number</span><span class="st">`</span>),</span>
+<span id="cb1-84"><a href="#cb1-84" aria-hidden="true" tabindex="-1"></a>    <span class="at">.groups =</span> <span class="st">"drop"</span></span>
+<span id="cb1-85"><a href="#cb1-85" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb1-86"><a href="#cb1-86" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rowwise</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb1-87"><a href="#cb1-87" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb1-88"><a href="#cb1-88" aria-hidden="true" tabindex="-1"></a>    <span class="at">samples_colored =</span> <span class="fu">paste</span>(sample_names, <span class="at">collapse =</span> <span class="st">"&lt;br&gt;"</span>)</span>
+<span id="cb1-89"><a href="#cb1-89" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb1-90"><a href="#cb1-90" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span>
+<span id="cb1-91"><a href="#cb1-91" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-92"><a href="#cb1-92" aria-hidden="true" tabindex="-1"></a><span class="co"># Create leaflet map</span></span>
+<span id="cb1-93"><a href="#cb1-93" aria-hidden="true" tabindex="-1"></a>map <span class="ot">&lt;-</span> <span class="fu">leaflet</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb1-94"><a href="#cb1-94" aria-hidden="true" tabindex="-1"></a>  <span class="fu">addTiles</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb1-95"><a href="#cb1-95" aria-hidden="true" tabindex="-1"></a>  <span class="fu">setView</span>(<span class="at">lat =</span> <span class="fu">mean</span>(coords_summary<span class="sc">$</span>Latitude), <span class="at">lng =</span> <span class="fu">mean</span>(coords_summary<span class="sc">$</span>Longitude), <span class="at">zoom =</span> <span class="dv">5</span>)</span>
+<span id="cb1-96"><a href="#cb1-96" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-97"><a href="#cb1-97" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-98"><a href="#cb1-98" aria-hidden="true" tabindex="-1"></a><span class="co"># Add published samples as circles</span></span>
+<span id="cb1-99"><a href="#cb1-99" aria-hidden="true" tabindex="-1"></a>map <span class="ot">&lt;-</span> map <span class="sc">%&gt;%</span></span>
+<span id="cb1-100"><a href="#cb1-100" aria-hidden="true" tabindex="-1"></a>  <span class="fu">addCircleMarkers</span>(</span>
+<span id="cb1-101"><a href="#cb1-101" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> coords_summary <span class="sc">%&gt;%</span> <span class="fu">filter</span>(has_published),</span>
+<span id="cb1-102"><a href="#cb1-102" aria-hidden="true" tabindex="-1"></a>    <span class="at">lng =</span> <span class="sc">~</span>Longitude,</span>
+<span id="cb1-103"><a href="#cb1-103" aria-hidden="true" tabindex="-1"></a>    <span class="at">lat =</span> <span class="sc">~</span>Latitude,</span>
+<span id="cb1-104"><a href="#cb1-104" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="sc">~</span>color,</span>
+<span id="cb1-105"><a href="#cb1-105" aria-hidden="true" tabindex="-1"></a>    <span class="at">radius =</span> <span class="dv">6</span>,</span>
+<span id="cb1-106"><a href="#cb1-106" aria-hidden="true" tabindex="-1"></a>    <span class="at">weight =</span> <span class="dv">1</span>,</span>
+<span id="cb1-107"><a href="#cb1-107" aria-hidden="true" tabindex="-1"></a>    <span class="at">opacity =</span> <span class="dv">1</span>,</span>
+<span id="cb1-108"><a href="#cb1-108" aria-hidden="true" tabindex="-1"></a>    <span class="at">fillOpacity =</span> <span class="dv">1</span>,</span>
+<span id="cb1-109"><a href="#cb1-109" aria-hidden="true" tabindex="-1"></a>    <span class="at">label =</span> <span class="sc">~</span>Location,</span>
+<span id="cb1-110"><a href="#cb1-110" aria-hidden="true" tabindex="-1"></a>    <span class="at">popup =</span> <span class="sc">~</span><span class="fu">paste0</span>(</span>
+<span id="cb1-111"><a href="#cb1-111" aria-hidden="true" tabindex="-1"></a>      <span class="st">"&lt;b&gt;Coordinates:&lt;/b&gt; "</span>, Latitude, <span class="st">", "</span>, Longitude, <span class="st">"&lt;br&gt;"</span>,</span>
+<span id="cb1-112"><a href="#cb1-112" aria-hidden="true" tabindex="-1"></a>      <span class="st">"&lt;b&gt;Samples at this location:&lt;/b&gt; "</span>, sample_count, <span class="st">"&lt;br&gt;"</span>,</span>
+<span id="cb1-113"><a href="#cb1-113" aria-hidden="true" tabindex="-1"></a>      <span class="st">"&lt;b&gt;Countries:&lt;/b&gt; "</span>, countries, <span class="st">"&lt;br&gt;"</span>,</span>
+<span id="cb1-114"><a href="#cb1-114" aria-hidden="true" tabindex="-1"></a>      <span class="st">"&lt;b&gt;Location:&lt;/b&gt; "</span>, Location, <span class="st">"&lt;br&gt;"</span>,</span>
+<span id="cb1-115"><a href="#cb1-115" aria-hidden="true" tabindex="-1"></a>      <span class="st">"&lt;b&gt;Sample IDs:&lt;/b&gt;&lt;br&gt;"</span>, samples_colored</span>
+<span id="cb1-116"><a href="#cb1-116" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb1-117"><a href="#cb1-117" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb1-118"><a href="#cb1-118" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-119"><a href="#cb1-119" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-120"><a href="#cb1-120" aria-hidden="true" tabindex="-1"></a>small_icon <span class="ot">&lt;-</span> <span class="fu">makeIcon</span>(</span>
+<span id="cb1-121"><a href="#cb1-121" aria-hidden="true" tabindex="-1"></a>  <span class="at">iconUrl =</span> <span class="st">"https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-green.png"</span>,</span>
+<span id="cb1-122"><a href="#cb1-122" aria-hidden="true" tabindex="-1"></a>  <span class="at">shadowUrl =</span> <span class="st">"https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-shadow.png"</span>,</span>
+<span id="cb1-123"><a href="#cb1-123" aria-hidden="true" tabindex="-1"></a>  <span class="at">iconWidth =</span> <span class="dv">15</span>,   <span class="co"># smaller width (default is 25)</span></span>
+<span id="cb1-124"><a href="#cb1-124" aria-hidden="true" tabindex="-1"></a>  <span class="at">iconHeight =</span> <span class="dv">25</span>,  <span class="co"># smaller height (default is 41)</span></span>
+<span id="cb1-125"><a href="#cb1-125" aria-hidden="true" tabindex="-1"></a>  <span class="at">iconAnchorX =</span> <span class="dv">7</span>,  <span class="co"># adjust anchor point accordingly (usually half of width)</span></span>
+<span id="cb1-126"><a href="#cb1-126" aria-hidden="true" tabindex="-1"></a>  <span class="at">iconAnchorY =</span> <span class="dv">25</span>  <span class="co"># usually equals iconHeight</span></span>
+<span id="cb1-127"><a href="#cb1-127" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb1-128"><a href="#cb1-128" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-129"><a href="#cb1-129" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-130"><a href="#cb1-130" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-131"><a href="#cb1-131" aria-hidden="true" tabindex="-1"></a><span class="co"># Add add-marked samples as colored markers with popups (no rectangles)</span></span>
+<span id="cb1-132"><a href="#cb1-132" aria-hidden="true" tabindex="-1"></a><span class="co"># We'll use leaflet icons matching colors for markers</span></span>
+<span id="cb1-133"><a href="#cb1-133" aria-hidden="true" tabindex="-1"></a>marker_icons <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
+<span id="cb1-134"><a href="#cb1-134" aria-hidden="true" tabindex="-1"></a>  <span class="at">green =</span> <span class="fu">makeIcon</span>(<span class="at">iconUrl =</span> <span class="st">"https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-green.png"</span>, <span class="at">iconWidth =</span> <span class="dv">15</span>, <span class="at">iconHeight =</span> <span class="dv">25</span>, <span class="at">iconAnchorX =</span> <span class="dv">7</span>, <span class="at">iconAnchorY =</span> <span class="dv">25</span>),</span>
+<span id="cb1-135"><a href="#cb1-135" aria-hidden="true" tabindex="-1"></a>  <span class="at">blue =</span> <span class="fu">makeIcon</span>(<span class="at">iconUrl =</span> <span class="st">"https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-blue.png"</span>, <span class="at">iconWidth =</span> <span class="dv">15</span>, <span class="at">iconHeight =</span> <span class="dv">25</span>, <span class="at">iconAnchorX =</span> <span class="dv">7</span>, <span class="at">iconAnchorY =</span> <span class="dv">25</span>),</span>
+<span id="cb1-136"><a href="#cb1-136" aria-hidden="true" tabindex="-1"></a>  <span class="at">yellow =</span> <span class="fu">makeIcon</span>(<span class="at">iconUrl =</span> <span class="st">"https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-yellow.png"</span>, <span class="at">iconWidth =</span> <span class="dv">15</span>, <span class="at">iconHeight =</span> <span class="dv">25</span>, <span class="at">iconAnchorX =</span> <span class="dv">7</span>, <span class="at">iconAnchorY =</span> <span class="dv">25</span>),</span>
+<span id="cb1-137"><a href="#cb1-137" aria-hidden="true" tabindex="-1"></a>  <span class="at">black =</span> <span class="fu">makeIcon</span>(<span class="at">iconUrl =</span> <span class="st">"https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-black.png"</span>, <span class="at">iconWidth =</span> <span class="dv">15</span>, <span class="at">iconHeight =</span> <span class="dv">25</span>, <span class="at">iconAnchorX =</span> <span class="dv">7</span>, <span class="at">iconAnchorY =</span> <span class="dv">25</span>))</span>
+<span id="cb1-138"><a href="#cb1-138" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-139"><a href="#cb1-139" aria-hidden="true" tabindex="-1"></a>add_sample_points <span class="ot">&lt;-</span> coords_summary <span class="sc">%&gt;%</span> <span class="fu">filter</span>(has_add_sample)</span>
+<span id="cb1-140"><a href="#cb1-140" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-141"><a href="#cb1-141" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="fu">seq_len</span>(<span class="fu">nrow</span>(add_sample_points))) {</span>
+<span id="cb1-142"><a href="#cb1-142" aria-hidden="true" tabindex="-1"></a>  col <span class="ot">&lt;-</span> add_sample_points<span class="sc">$</span>color[i]</span>
+<span id="cb1-143"><a href="#cb1-143" aria-hidden="true" tabindex="-1"></a>  icon <span class="ot">&lt;-</span> marker_icons[[col]]</span>
+<span id="cb1-144"><a href="#cb1-144" aria-hidden="true" tabindex="-1"></a>  popup_html <span class="ot">&lt;-</span> <span class="fu">paste0</span>(</span>
+<span id="cb1-145"><a href="#cb1-145" aria-hidden="true" tabindex="-1"></a>    <span class="st">"&lt;b&gt;Coordinates:&lt;/b&gt; "</span>, add_sample_points<span class="sc">$</span>Latitude[i], <span class="st">", "</span>, add_sample_points<span class="sc">$</span>Longitude[i], <span class="st">"&lt;br&gt;"</span>,</span>
+<span id="cb1-146"><a href="#cb1-146" aria-hidden="true" tabindex="-1"></a>    <span class="st">"&lt;b&gt;Samples at this location:&lt;/b&gt; "</span>, add_sample_points<span class="sc">$</span>sample_count[i], <span class="st">"&lt;br&gt;"</span>,</span>
+<span id="cb1-147"><a href="#cb1-147" aria-hidden="true" tabindex="-1"></a>    <span class="st">"&lt;b&gt;Countries:&lt;/b&gt; "</span>, add_sample_points<span class="sc">$</span>countries[i], <span class="st">"&lt;br&gt;"</span>,</span>
+<span id="cb1-148"><a href="#cb1-148" aria-hidden="true" tabindex="-1"></a>    <span class="st">"&lt;b&gt;Location:&lt;/b&gt; "</span>, add_sample_points<span class="sc">$</span>Location[i], <span class="st">"&lt;br&gt;"</span>,</span>
+<span id="cb1-149"><a href="#cb1-149" aria-hidden="true" tabindex="-1"></a>    <span class="st">"&lt;b&gt;Sample IDs:&lt;/b&gt;&lt;br&gt;"</span>, add_sample_points<span class="sc">$</span>samples_colored[i]</span>
+<span id="cb1-150"><a href="#cb1-150" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb1-151"><a href="#cb1-151" aria-hidden="true" tabindex="-1"></a>  map <span class="ot">&lt;-</span> <span class="fu">addMarkers</span>(</span>
+<span id="cb1-152"><a href="#cb1-152" aria-hidden="true" tabindex="-1"></a>    map,</span>
+<span id="cb1-153"><a href="#cb1-153" aria-hidden="true" tabindex="-1"></a>    <span class="at">lng =</span> add_sample_points<span class="sc">$</span>Longitude[i],</span>
+<span id="cb1-154"><a href="#cb1-154" aria-hidden="true" tabindex="-1"></a>    <span class="at">lat =</span> add_sample_points<span class="sc">$</span>Latitude[i],</span>
+<span id="cb1-155"><a href="#cb1-155" aria-hidden="true" tabindex="-1"></a>    <span class="at">icon =</span> icon,</span>
+<span id="cb1-156"><a href="#cb1-156" aria-hidden="true" tabindex="-1"></a>    <span class="at">popup =</span> popup_html,</span>
+<span id="cb1-157"><a href="#cb1-157" aria-hidden="true" tabindex="-1"></a>    <span class="at">label =</span> add_sample_points<span class="sc">$</span>Location[i]</span>
+<span id="cb1-158"><a href="#cb1-158" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb1-159"><a href="#cb1-159" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1-160"><a href="#cb1-160" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-161"><a href="#cb1-161" aria-hidden="true" tabindex="-1"></a><span class="co"># Add legend manually</span></span>
+<span id="cb1-162"><a href="#cb1-162" aria-hidden="true" tabindex="-1"></a>map <span class="ot">&lt;-</span> map <span class="sc">%&gt;%</span></span>
+<span id="cb1-163"><a href="#cb1-163" aria-hidden="true" tabindex="-1"></a>  <span class="fu">addLegend</span>(</span>
+<span id="cb1-164"><a href="#cb1-164" aria-hidden="true" tabindex="-1"></a>    <span class="at">position =</span> <span class="st">"bottomleft"</span>,</span>
+<span id="cb1-165"><a href="#cb1-165" aria-hidden="true" tabindex="-1"></a>    <span class="at">colors =</span> <span class="fu">c</span>(<span class="st">"green"</span>, <span class="st">"darkblue"</span>, <span class="st">"orange"</span>, <span class="st">"darkred"</span>),</span>
+<span id="cb1-166"><a href="#cb1-166" aria-hidden="true" tabindex="-1"></a>    <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Spain/France/Belgien/Britain"</span>, <span class="st">"Switzerland/Italy"</span>, <span class="st">"Russia/Czech/Poland"</span>, <span class="st">"Other"</span>),</span>
+<span id="cb1-167"><a href="#cb1-167" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Country color"</span>,</span>
+<span id="cb1-168"><a href="#cb1-168" aria-hidden="true" tabindex="-1"></a>    <span class="at">opacity =</span> <span class="dv">1</span></span>
+<span id="cb1-169"><a href="#cb1-169" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell">
+<details class="code-fold">
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>map</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div class="leaflet html-widget html-fill-item" id="htmlwidget-792cb25c7efd05eb000c" style="width:100%;height:464px;"></div>
+<script type="application/json" data-for="htmlwidget-792cb25c7efd05eb000c">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"https://openstreetmap.org/copyright/\">OpenStreetMap<\/a>,  <a href=\"https://opendatacommons.org/licenses/odbl/\">ODbL<\/a>"}]},{"method":"addCircleMarkers","args":[[40.95909,40.59966,41.02467222,59.08333333,59.05,59.13333333,59.323171,59.130111,58.95,58.7564192,58.76666667,59.28333333,58.843491,58.81666667,58.85,59.23333333,59.177976,59.25,59.3,59.272946,43.31666667,49.26666667,46.116389,49.76666667,50.08333333,50.86666667,51.05769444,51.21791667,49.28364,46.36208333,48.18333333,46.805605,46.68058,47.43055,47.18443541,51.784528,46.05165,46.80605591,46.62605556,49.34011111,54.05,48.89,53.58333333,56.33333333],[-5.66137,-4.70519,-4.111694444,-3.3,-3.116666667,-3.05,-2.997709,-2.989777,-2.95,-2.9386647,-2.933333333,-2.933333333,-2.92363,-2.916666667,-2.916666667,-2.866666667,-2.759467,-2.583333333,-2.55,-2.4848175,-1.166666667,-0.433333333,0.346389,0.516666667,1.566666667,1.816666667,2.668777778,3.079277778,3.93997,4.215491667,6.016666667,6.164746,6.18723,6.742983333,6.822475117,7.633349,8.99273,9.399233475999999,10.7575,10.81938889,11.7,16.45638889,22.78333333,41.41666667],6,null,null,{"interactive":true,"className":"","stroke":true,"color":["green","green","green","green","green","green","green","green","green","green","green","green","green","green","green","green","green","green","green","green","green","green","green","green","green","green","darkred","darkred","green","green","green","green","green","green","green","darkred","darkblue","darkblue","darkblue","darkred","darkred","orange","orange","orange"],"weight":1,"opacity":1,"fill":true,"fillColor":["green","green","green","green","green","green","green","green","green","green","green","green","green","green","green","green","green","green","green","green","green","green","green","green","green","green","darkred","darkred","green","green","green","green","green","green","green","darkred","darkblue","darkblue","darkblue","darkred","darkred","orange","orange","orange"],"fillOpacity":1},null,null,["<b>Coordinates:<\/b> 40.95909, -5.66137<br><b>Samples at this location:<\/b> 1<br><b>Countries:<\/b> Spain<br><b>Location:<\/b> Salamanca,Spain<br><b>Sample IDs:<\/b><br>MarESa08","<b>Coordinates:<\/b> 40.59966, -4.70519<br><b>Samples at this location:<\/b> 2<br><b>Countries:<\/b> Spain<br><b>Location:<\/b> Avila,Spain<br><b>Sample IDs:<\/b><br>MarEAv04<br>MarESAv05","<b>Coordinates:<\/b> 41.02467222, -4.111694444<br><b>Samples at this location:<\/b> 30<br><b>Countries:<\/b> Spain<br><b>Location:<\/b> MatadeQuintanar<br><b>Sample IDs:<\/b><br>MarEMq01<br>MarEMq02<br>MarEMq03<br>MarEMq04<br>MarEMq05<br>MarEMq06<br>MarEMq07<br>MarEMq08<br>MarEMq09<br>MarEMq10<br>MarEMq11<br>MarEMq12<br>MarEMq13<br>MarEMq14<br>MarEMq15<br>MarEMq16<br>MarEMq17<br>MarEMq18<br>MarEMq19<br>MarEMq20<br>MarEMq21<br>MarEMq22<br>MarEMq23<br>MarEMq24<br>MarEMq25<br>MarEMq26<br>MarEMq27<br>MarEMq28<br>MarEMq29<br>MarEMq30","<b>Coordinates:<\/b> 59.08333333, -3.3<br><b>Samples at this location:<\/b> 5<br><b>Countries:<\/b> Orkney Island<br><b>Location:<\/b> OrkneyMainland;Sandwick-Bryameadow<br><b>Sample IDs:<\/b><br>MarOMBr149<br>MarOMBr240<br>MarOMBr241<br>MarOMBr242<br>MarOMBr243","<b>Coordinates:<\/b> 59.05, -3.116666667<br><b>Samples at this location:<\/b> 25<br><b>Countries:<\/b> Orkney Island<br><b>Location:<\/b> OrkneyMainland;Settiscarth<br><b>Sample IDs:<\/b><br>MarOMSe161<br>MarOMSe162<br>MarOMSe167<br>MarOMSe168<br>MarOMSe169<br>MarOMSe170<br>MarOMSe171<br>MarOMSe183<br>MarOMSe184<br>MarOMSe185<br>MarOMSe186<br>MarOMSe187<br>MarOMSe188<br>MarOMSe189<br>MarOMSe190<br>MarOMSe191<br>MarOMSe192<br>MarOMSe193<br>MarOMSe194<br>MarOMSe195<br>MarOMSe196<br>MarOMSe197<br>MarOMSe198<br>MarOMSe199<br>MarOMSe200","<b>Coordinates:<\/b> 59.13333333, -3.05<br><b>Samples at this location:<\/b> 1<br><b>Countries:<\/b> Orkney Island<br><b>Location:<\/b> Rousay;Newhouse<br><b>Sample IDs:<\/b><br>MarORNe205","<b>Coordinates:<\/b> 59.323171, -2.997709<br><b>Samples at this location:<\/b> 30<br><b>Countries:<\/b> Orkney Island<br><b>Location:<\/b> Westray;PierowallGolfClub<br><b>Sample IDs:<\/b><br>MarOWPg01<br>MarOWPg02<br>MarOWPg03<br>MarOWPg04<br>MarOWPg05<br>MarOWPg06<br>MarOWPg07<br>MarOWPg08<br>MarOWPg09<br>MarOWPg10<br>MarOWPg11<br>MarOWPg12<br>MarOWPg13<br>MarOWPg14<br>MarOWPg15<br>MarOWPg16<br>MarOWPg17<br>MarOWPg18<br>MarOWPg19<br>MarOWPg20<br>MarOWPg21<br>MarOWPg22<br>MarOWPg23<br>MarOWPg24<br>MarOWPg25<br>MarOWPg26<br>MarOWPg27<br>MarOWPg28<br>MarOWPg29<br>MarOWPg30","<b>Coordinates:<\/b> 59.130111, -2.989777<br><b>Samples at this location:<\/b> 31<br><b>Countries:<\/b> Orkney Island<br><b>Location:<\/b> Rousay;GarbagesiteinShortland<br><b>Sample IDs:<\/b><br>MarORGs01<br>MarORGs02<br>MarORGs03<br>MarORGs04<br>MarORGs05<br>MarORGs06<br>MarORGs07<br>MarORGs08<br>MarORGs09<br>MarORGs10<br>MarORGs11<br>MarORGs12<br>MarORGs13<br>MarORGs14<br>MarORGs15<br>MarORGs16<br>MarORGs17<br>MarORGs18<br>MarORGs19<br>MarORGs20<br>MarORGs21<br>MarORGs22<br>MarORGs23<br>MarORGs24<br>MarORGs25<br>MarORGs26<br>MarORGs27<br>MarORGs28<br>MarORGs29<br>MarORGs30<br>MarORGs31","<b>Coordinates:<\/b> 58.95, -2.95<br><b>Samples at this location:<\/b> 19<br><b>Countries:<\/b> Orkney Island<br><b>Location:<\/b> OrkneyMainland;St.Ola<br><b>Sample IDs:<\/b><br>MarOMSO216<br>MarOMSO217<br>MarOMSO218<br>MarOMSO221<br>MarOMSO222<br>MarOMSO223<br>MarOMSO224<br>MarOMSO227<br>MarOMSO228<br>MarOMSO229<br>MarOMSO232<br>MarOMSO245<br>MarOMSO246<br>MarOMSO247<br>MarOMSO248<br>MarOMSO250<br>MarOMSO283<br>MarOMSO284<br>MarOMSO289","<b>Coordinates:<\/b> 58.7564192, -2.9386647<br><b>Samples at this location:<\/b> 23<br><b>Countries:<\/b> Orkney Island<br><b>Location:<\/b> SouthRonaldsay;JohnCrossleyFarm<br><b>Sample IDs:<\/b><br>MarOSJC01<br>MarOSJC02<br>MarOSJC03<br>MarOSJC04<br>MarOSJC05<br>MarOSJC06<br>MarOSJC07<br>MarOSJC08<br>MarOSJC09<br>MarOSJC10<br>MarOSJC11<br>MarOSJC12<br>MarOSJC13<br>MarOSJC14<br>MarOSJC15<br>MarOSJC16<br>MarOSJC17<br>MarOSJC18<br>MarOSJC19<br>MarOSJC20<br>MarOSJC21<br>MarOSJC22<br>MarOSJC23","<b>Coordinates:<\/b> 58.76666667, -2.933333333<br><b>Samples at this location:<\/b> 19<br><b>Countries:<\/b> Orkney Island<br><b>Location:<\/b> SouthRonaldsay;WindWick<br><b>Sample IDs:<\/b><br>MarOSWi158<br>MarOSWi159<br>MarOSWi165<br>MarOSWi166<br>MarOSWi173<br>MarOSWi174<br>MarOSWi175<br>MarOSWi176<br>MarOSWi177<br>MarOSWi178<br>MarOSWi179<br>MarOSWi180<br>MarOSWi181<br>MarOSWi201<br>MarOSWi202<br>MarOSWi203<br>MarOSWi204<br>MarOSWi206<br>MarOSWi207","<b>Coordinates:<\/b> 59.28333333, -2.933333333<br><b>Samples at this location:<\/b> 21<br><b>Countries:<\/b> Orkney Island<br><b>Location:<\/b> Westray;LochofSwartmill<br><b>Sample IDs:<\/b><br>MarOWLs019<br>MarOWLs020<br>MarOWLs021<br>MarOWLs022<br>MarOWLs033<br>MarOWLs077<br>MarOWLs078<br>MarOWLs079<br>MarOWLs080<br>MarOWLs081<br>MarOWLs095<br>MarOWLs096<br>MarOWLs107<br>MarOWLs108<br>MarOWLs109<br>MarOWLs110<br>MarOWLs118<br>MarOWLs119<br>MarOWLs120<br>MarOWLs130<br>MarOWLs131","<b>Coordinates:<\/b> 58.843491, -2.92363<br><b>Samples at this location:<\/b> 18<br><b>Countries:<\/b> Orkney Island<br><b>Location:<\/b> Burray;Westshore<br><b>Sample IDs:<\/b><br>MarOBWs01<br>MarOBWs02<br>MarOBWs03<br>MarOBWs04<br>MarOBWs05<br>MarOBWs06<br>MarOBWs07<br>MarOBWs08<br>MarOBWs09<br>MarOBWs10<br>MarOBWs11<br>MarOBWs12<br>MarOBWs13<br>MarOBWs14<br>MarOBWs15<br>MarOBWs16<br>MarOBWs17<br>MarOBWs18","<b>Coordinates:<\/b> 58.81666667, -2.916666667<br><b>Samples at this location:<\/b> 20<br><b>Countries:<\/b> Orkney Island<br><b>Location:<\/b> SouthRonaldsay;Grimness<br><b>Sample IDs:<\/b><br>MarOSGr132<br>MarOSGr133<br>MarOSGr134<br>MarOSGr135<br>MarOSGr136<br>MarOSGr137<br>MarOSGr138<br>MarOSGr139<br>MarOSGr140<br>MarOSGr141<br>MarOSGr142<br>MarOSGr143<br>MarOSGr144<br>MarOSGr145<br>MarOSGr150<br>MarOSGr151<br>MarOSGr152<br>MarOSGr153<br>MarOSGr155<br>MarOSGr156","<b>Coordinates:<\/b> 58.85, -2.916666667<br><b>Samples at this location:<\/b> 2<br><b>Countries:<\/b> Orkney Island<br><b>Location:<\/b> Burray;Southtown<br><b>Sample IDs:<\/b><br>MarOBSO233<br>MarOBSO234","<b>Coordinates:<\/b> 59.23333333, -2.866666667<br><b>Samples at this location:<\/b> 23<br><b>Countries:<\/b> Orkney Island<br><b>Location:<\/b> Westray;Ness<br><b>Sample IDs:<\/b><br>MarOWNe032<br>MarOWNe051<br>MarOWNe052<br>MarOWNe071<br>MarOWNe076<br>MarOWNe091<br>MarOWNe092<br>MarOWNe093<br>MarOWNe103<br>MarOWNe104<br>MarOWNe105<br>MarOWNe114<br>MarOWNe115<br>MarOWNe116<br>MarOWNe117<br>MarOWNe121<br>MarOWNe122<br>MarOWNe123<br>MarOWNe124<br>MarOWNe125<br>MarOWNe126<br>MarOWNe127<br>MarOWNe128","<b>Coordinates:<\/b> 59.177976, -2.759467<br><b>Samples at this location:<\/b> 30<br><b>Countries:<\/b> Orkney Island<br><b>Location:<\/b> Eday;Originalsite<br><b>Sample IDs:<\/b><br>MarOEOs01<br>MarOEOs02<br>MarOEOs03<br>MarOEOs04<br>MarOEOs05<br>MarOEOs06<br>MarOEOs07<br>MarOEOs08<br>MarOEOs09<br>MarOEOs10<br>MarOEOs11<br>MarOEOs12<br>MarOEOs13<br>MarOEOs14<br>MarOEOs15<br>MarOEOs16<br>MarOEOs17<br>MarOEOs18<br>MarOEOs19<br>MarOEOs20<br>MarOEOs21<br>MarOEOs22<br>MarOEOs23<br>MarOEOs24<br>MarOEOs25<br>MarOEOs26<br>MarOEOs27<br>MarOEOs28<br>MarOEOs29<br>MarOEOs30","<b>Coordinates:<\/b> 59.25, -2.583333333<br><b>Samples at this location:<\/b> 6<br><b>Countries:<\/b> Orkney Island<br><b>Location:<\/b> Sanday;LittleSea<br><b>Sample IDs:<\/b><br>MarOSaLi257<br>MarOSaLi258<br>MarOSaLi266<br>MarOSaLi269<br>MarOSaLi278<br>MarOSaLi279","<b>Coordinates:<\/b> 59.3, -2.55<br><b>Samples at this location:<\/b> 15<br><b>Countries:<\/b> Orkney Island<br><b>Location:<\/b> Sanday;WhitemillBay<br><b>Sample IDs:<\/b><br>MarOSaWh252<br>MarOSaWh253<br>MarOSaWh254<br>MarOSaWh255<br>MarOSaWh256<br>MarOSaWh260<br>MarOSaWh261<br>MarOSaWh268<br>MarOSaWh270<br>MarOSaWh271<br>MarOSaWh272<br>MarOSaWh273<br>MarOSaWh274<br>MarOSaWh275<br>MarOSaWh282","<b>Coordinates:<\/b> 59.272946, -2.4848175<br><b>Samples at this location:<\/b> 44<br><b>Countries:<\/b> Orkney Island<br><b>Location:<\/b> Sanday;Newark<br><b>Sample IDs:<\/b><br>MarOSaNe01<br>MarOSaNe02<br>MarOSaNe03<br>MarOSaNe04<br>MarOSaNe05<br>MarOSaNe06<br>MarOSaNe07<br>MarOSaNe08<br>MarOSaNe09<br>MarOSaNe10<br>MarOSaNe11<br>MarOSaNe12<br>MarOSaNe13<br>MarOSaNe14<br>MarOSaNe15<br>MarOSaNe16<br>MarOSaNe17<br>MarOSaNe18<br>MarOSaNe19<br>MarOSaNe20<br>MarOSaNe21<br>MarOSaNe22<br>MarOSaNe23<br>MarOSaNe24<br>MarOSaNe25<br>MarOSaNe26<br>MarOSaNe27<br>MarOSaNe28<br>MarOSaNe29<br>MarOSaNe30<br>MarOSaNe31<br>MarOSaNe32<br>MarOSaNe33<br>MarOSaNe34<br>MarOSaNe35<br>MarOSaNe36<br>MarOSaNe37<br>MarOSaNe38<br>MarOSaNe39<br>MarOSaNe40<br>MarOSaNe41<br>MarOSaNe42<br>MarOSaNe43<br>MarOSaNe44","<b>Coordinates:<\/b> 43.31666667, -1.166666667<br><b>Samples at this location:<\/b> 2<br><b>Countries:<\/b> France<br><b>Location:<\/b> PaysBasque,Armendarits<br><b>Sample IDs:<\/b><br>MarFA01<br>MarFA02","<b>Coordinates:<\/b> 49.26666667, -0.433333333<br><b>Samples at this location:<\/b> 24<br><b>Countries:<\/b> France<br><b>Location:<\/b> Thaon;Caen<br><b>Sample IDs:<\/b><br>MarFTh478<br>MarFTh479<br>MarFTh480<br>MarFTh481<br>MarFTh482<br>MarFTh483<br>MarFTh484<br>MarFTh485<br>MarFTh486<br>MarFTh487<br>MarFTh488<br>MarFTh489<br>MarFTh490<br>MarFTh491<br>MarFTh492<br>MarFTh493<br>MarFTh494<br>MarFTh495<br>MarFTh496<br>MarFTh497<br>MarFTh498<br>MarFTh499<br>MarFTh500<br>MarFTh501","<b>Coordinates:<\/b> 46.116389, 0.346389<br><b>Samples at this location:<\/b> 11<br><b>Countries:<\/b> France<br><b>Location:<\/b> Chiz ,Deuxs vres<br><b>Sample IDs:<\/b><br>MarFCh05<br>MarFCh06<br>MarFCh07<br>MarFCh08<br>MarFCh09<br>MarFCh10<br>MarFCh11<br>MarFCh12<br>MarFCh13<br>MarFCh14<br>MarFCh15","<b>Coordinates:<\/b> 49.76666667, 0.516666667<br><b>Samples at this location:<\/b> 20<br><b>Countries:<\/b> France<br><b>Location:<\/b> Daubeuf;F camp<br><b>Sample IDs:<\/b><br>MarFDa503<br>MarFDa504<br>MarFDa505<br>MarFDa506<br>MarFDa507<br>MarFDa508<br>MarFDa509<br>MarFDa510<br>MarFDa511<br>MarFDa512<br>MarFDa513<br>MarFDa514<br>MarFDa515<br>MarFDa516<br>MarFDa517<br>MarFDa518<br>MarFDa519<br>MarFDa520<br>MarFDa521<br>MarFDa522","<b>Coordinates:<\/b> 50.08333333, 1.566666667<br><b>Samples at this location:<\/b> 26<br><b>Countries:<\/b> France<br><b>Location:<\/b> Fressenneville;Abbeville<br><b>Sample IDs:<\/b><br>MarFFr523<br>MarFFr524<br>MarFFr525<br>MarFFr526<br>MarFFr528<br>MarFFr529<br>MarFFr530<br>MarFFr531<br>MarFFr532<br>MarFFr533<br>MarFFr534<br>MarFFr535<br>MarFFr536<br>MarFFr537<br>MarFFr538<br>MarFFr539<br>MarFFr540<br>MarFFr541<br>MarFFr542<br>MarFFr543<br>MarFFr544<br>MarFFr545<br>MarFFr546<br>MarFFr547<br>MarFFr548<br>MarFFr549","<b>Coordinates:<\/b> 50.86666667, 1.816666667<br><b>Samples at this location:<\/b> 22<br><b>Countries:<\/b> France<br><b>Location:<\/b> Pihenl sGu nes;Calais<br><b>Sample IDs:<\/b><br>MarFPi555<br>MarFPi556<br>MarFPi557<br>MarFPi558<br>MarFPi559<br>MarFPi560<br>MarFPi561<br>MarFPi562<br>MarFPi563<br>MarFPi564<br>MarFPi565<br>MarFPi566<br>MarFPi567<br>MarFPi568<br>MarFPi569<br>MarFPi570<br>MarFPi571<br>MarFPi572<br>MarFPi573<br>MarFPi574<br>MarFPi575<br>MarFPi576","<b>Coordinates:<\/b> 51.05769444, 2.668777778<br><b>Samples at this location:<\/b> 26<br><b>Countries:<\/b> Belgium<br><b>Location:<\/b> Veurne<br><b>Sample IDs:<\/b><br>MarBVe061<br>MarBVe062<br>MarBVe063<br>MarBVe064<br>MarBVe065<br>MarBVe066<br>MarBVe067<br>MarBVe068<br>MarBVe069<br>MarBVe070<br>MarBVe071<br>MarBVe072<br>MarBVe073<br>MarBVe074<br>MarBVe075<br>MarBVe076<br>MarBVe077<br>MarBVe078<br>MarBVe098<br>MarBVe099<br>MarBVe100<br>MarBVe101<br>MarBVe102<br>MarBVe103<br>MarBVe104<br>MarBVe105","<b>Coordinates:<\/b> 51.21791667, 3.079277778<br><b>Samples at this location:<\/b> 27<br><b>Countries:<\/b> Belgium<br><b>Location:<\/b> Stalhille<br><b>Sample IDs:<\/b><br>MarBSt048<br>MarBSt049<br>MarBSt050<br>MarBSt051<br>MarBSt052<br>MarBSt053<br>MarBSt054<br>MarBSt055<br>MarBSt056<br>MarBSt057<br>MarBSt058<br>MarBSt059<br>MarBSt060<br>MarBSt084<br>MarBSt085<br>MarBSt086<br>MarBSt087<br>MarBSt088<br>MarBSt089<br>MarBSt090<br>MarBSt091<br>MarBSt092<br>MarBSt093<br>MarBSt094<br>MarBSt095<br>MarBSt096<br>MarBSt097","<b>Coordinates:<\/b> 49.28364, 3.93997<br><b>Samples at this location:<\/b> 5<br><b>Countries:<\/b> France<br><b>Location:<\/b> Maco<br><b>Sample IDs:<\/b><br>MarFMc01<br>MarFMc02<br>MarFMc03<br>MarFMc04<br>MarFMc05","<b>Coordinates:<\/b> 46.36208333, 4.215491667<br><b>Samples at this location:<\/b> 33<br><b>Countries:<\/b> France<br><b>Location:<\/b> Saint-JuliendeCivry<br><b>Sample IDs:<\/b><br>MarFSt01<br>MarFSt02<br>MarFSt03<br>MarFSt04<br>MarFSt05<br>MarFSt06<br>MarFSt07<br>MarFSt08<br>MarFSt09<br>MarFSt10<br>MarFSt11<br>MarFSt12<br>MarFSt13<br>MarFSt14<br>MarFSt15<br>MarFSt16<br>MarFSt17<br>MarFSt18<br>MarFSt19<br>MarFSt20<br>MarFSt21<br>MarFSt22<br>MarFSt23<br>MarFSt24<br>MarFSt25<br>MarFSt26<br>MarFSt27<br>MarFSt28<br>MarFSt29<br>MarFSt30<br>MarFSt31<br>MarFSt32<br>MarFSt33","<b>Coordinates:<\/b> 48.18333333, 6.016666667<br><b>Samples at this location:<\/b> 2<br><b>Countries:<\/b> France<br><b>Location:<\/b> Lorraine,Monthureux-le-Sec<br><b>Sample IDs:<\/b><br>MarFM05<br>MarFM06","<b>Coordinates:<\/b> 46.805605, 6.164746<br><b>Samples at this location:<\/b> 2<br><b>Countries:<\/b> France<br><b>Location:<\/b> Bonnevaux<br><b>Sample IDs:<\/b><br>MarFBv01<br>MarFBv02","<b>Coordinates:<\/b> 46.68058, 6.18723<br><b>Samples at this location:<\/b> 1<br><b>Countries:<\/b> France<br><b>Location:<\/b> Gr set<br><b>Sample IDs:<\/b><br>MarFGr14","<b>Coordinates:<\/b> 47.43055, 6.742983333<br><b>Samples at this location:<\/b> 7<br><b>Countries:<\/b> France<br><b>Location:<\/b> Orgeans<br><b>Sample IDs:<\/b><br>MarFOg01<br>MarFOg02<br>MarFOg03<br>MarFOg04<br>MarFOg05<br>MarFOg06<br>MarFOg07","<b>Coordinates:<\/b> 47.18443541, 6.822475117<br><b>Samples at this location:<\/b> 2<br><b>Countries:<\/b> France<br><b>Location:<\/b> Creux de CharquementF<br><b>Sample IDs:<\/b><br>MarFCc01<br>MarFCc02","<b>Coordinates:<\/b> 51.784528, 7.633349<br><b>Samples at this location:<\/b> 20<br><b>Countries:<\/b> Germany<br><b>Location:<\/b> Ascheberg<br><b>Sample IDs:<\/b><br>MarDAb01<br>MarDAb02<br>MarDAb03<br>MarDAb04<br>MarDAb05<br>MarDAb06<br>MarDAb07<br>MarDAb08<br>MarDAb09<br>MarDAb10<br>MarDAb11<br>MarDAb12<br>MarDAb13<br>MarDAb14<br>MarDAb15<br>MarDAb16<br>MarDAb17<br>MarDAb18<br>MarDAb19<br>MarDAb20","<b>Coordinates:<\/b> 46.05165, 8.99273<br><b>Samples at this location:<\/b> 1<br><b>Countries:<\/b> Switzerland<br><b>Location:<\/b> Villa,Ticino<br><b>Sample IDs:<\/b><br>MarCHVa02","<b>Coordinates:<\/b> 46.80605591, 9.399233476<br><b>Samples at this location:<\/b> 23<br><b>Countries:<\/b> Switzerland<br><b>Location:<\/b> BonaduzDEMAFabrik,Switzerland<br><b>Sample IDs:<\/b><br>MarCHBo15<br>MarCHBo16<br>MarCHBo17<br>MarCHBo18<br>MarCHBo19<br>MarCHBo20<br>MarCHBo21<br>MarCHBo22<br>MarCHBo23<br>MarCHBo24<br>MarCHBo25<br>MarCHBo26<br>MarCHBo27<br>MarCHBo28<br>MarCHBo29<br>MarCHBo30<br>MarCHBo31<br>MarCHBo32<br>MarCHBo33<br>MarCHBo34<br>MarCHBo35<br>MarCHBo36<br>MarCHBo37","<b>Coordinates:<\/b> 46.62605556, 10.7575<br><b>Samples at this location:<\/b> 29<br><b>Countries:<\/b> Italy<br><b>Location:<\/b> Schlanders(Silandro)<br><b>Sample IDs:<\/b><br>MarISc01<br>MarISc02<br>MarISc03<br>MarISc04<br>MarISc05<br>MarISC06<br>MarISC07<br>MarISC08<br>MarISC09<br>MarISC10<br>MarISC11<br>MarISC12<br>MarISC13<br>MarISC14<br>MarISC15<br>MarISC16<br>MarISC17<br>MarISC18<br>MarISC19<br>MarISC20<br>MarISC21<br>MarISC22<br>MarISC23<br>MarISC24<br>MarISC25<br>MarISC26<br>MarISC27<br>MarISC28<br>MarISC29","<b>Coordinates:<\/b> 49.34011111, 10.81938889<br><b>Samples at this location:<\/b> 9<br><b>Countries:<\/b> Germany<br><b>Location:<\/b> Heilsbronn,Weiterndorf<br><b>Sample IDs:<\/b><br>MarHe40<br>MarHe41<br>MarHe42<br>MarHe43<br>MarHe44<br>MarHe45<br>MarHe46<br>MarHe47<br>MarHe48","<b>Coordinates:<\/b> 54.05, 11.7<br><b>Samples at this location:<\/b> 6<br><b>Countries:<\/b> Germany<br><b>Location:<\/b> WarnowtalbeiLangenBr tz,12kmnordwestlichvonSchwerin,Germany<br><b>Sample IDs:<\/b><br>MarDWa01<br>MarDWa02<br>MarDWa03<br>MarDWa04<br>MarDWa05<br>MarDWa06","<b>Coordinates:<\/b> 48.89, 16.45638889<br><b>Samples at this location:<\/b> 30<br><b>Countries:<\/b> Czech Republic<br><b>Location:<\/b> Drnholec<br><b>Sample IDs:<\/b><br>MarCZD01<br>MarCZD02<br>MarCZD03<br>MarCZD04<br>MarCZD05<br>MarCZD06<br>MarCZD07<br>MarCZD08<br>MarCZD09<br>MarCZD10<br>MarCZD11<br>MarCZD12<br>MarCZD13<br>MarCZD14<br>MarCZD15<br>MarCZD16<br>MarCZD17<br>MarCZD18<br>MarCZD19<br>MarCZD20<br>MarCZD21<br>MarCZD22<br>MarCZD23<br>MarCZD24<br>MarCZD25<br>MarCZD26<br>MarCZD27<br>MarCZD28<br>MarCZD29<br>MarCZD30","<b>Coordinates:<\/b> 53.58333333, 22.78333333<br><b>Samples at this location:<\/b> 23<br><b>Countries:<\/b> Poland<br><b>Location:<\/b> Srodkowy<br><b>Sample IDs:<\/b><br>MarPSr01<br>MarPSr02<br>MarPSr03<br>MarPSr04<br>MarPSr05<br>MarPSr06<br>MarPSr07<br>MarPSr08<br>MarPSr09<br>MarPSr10<br>MarPSr11<br>MarPSr12<br>MarPSr13<br>MarPSr14<br>MarPSr15<br>MarPSr16<br>MarPSr17<br>MarPSr18<br>MarPSr19<br>MarPSr20<br>MarPSr21<br>MarPSr22<br>MarPSr23","<b>Coordinates:<\/b> 56.33333333, 41.41666667<br><b>Samples at this location:<\/b> 4<br><b>Countries:<\/b> Russia<br><b>Location:<\/b> Vladimirregion,Kovrov(Mar-M.obscurushybridzone)<br><b>Sample IDs:<\/b><br>MarRuKo01<br>MarRuKo02<br>MarRuKo03<br>MarRuKo04"],null,["Salamanca,Spain","Avila,Spain","MatadeQuintanar","OrkneyMainland;Sandwick-Bryameadow","OrkneyMainland;Settiscarth","Rousay;Newhouse","Westray;PierowallGolfClub","Rousay;GarbagesiteinShortland","OrkneyMainland;St.Ola","SouthRonaldsay;JohnCrossleyFarm","SouthRonaldsay;WindWick","Westray;LochofSwartmill","Burray;Westshore","SouthRonaldsay;Grimness","Burray;Southtown","Westray;Ness","Eday;Originalsite","Sanday;LittleSea","Sanday;WhitemillBay","Sanday;Newark","PaysBasque,Armendarits","Thaon;Caen","Chiz ,Deuxs vres","Daubeuf;F camp","Fressenneville;Abbeville","Pihenl sGu nes;Calais","Veurne","Stalhille","Maco","Saint-JuliendeCivry","Lorraine,Monthureux-le-Sec","Bonnevaux","Gr set","Orgeans","Creux de CharquementF","Ascheberg","Villa,Ticino","BonaduzDEMAFabrik,Switzerland","Schlanders(Silandro)","Heilsbronn,Weiterndorf","WarnowtalbeiLangenBr tz,12kmnordwestlichvonSchwerin,Germany","Drnholec","Srodkowy","Vladimirregion,Kovrov(Mar-M.obscurushybridzone)"],{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]},{"method":"addMarkers","args":[59.079469,-3.213577,{"iconUrl":{"data":"https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-green.png","index":0},"iconWidth":15,"iconHeight":25,"iconAnchorX":7,"iconAnchorY":25},null,null,{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},"<b>Coordinates:<\/b> 59.079469, -3.213577<br><b>Samples at this location:<\/b> 16<br><b>Countries:<\/b> Orkney Island<br><b>Location:<\/b> Mainland;Dounby<br><b>Sample IDs:<\/b><br>MarOMDo01<br>MarOMDo02<br>MarOMDo03<br>MarOMDo04<br>MarOMDo05<br>MarOMDo06<br>MarOMDo07<br>MarOMDo08<br>MarOMDo09<br>MarOMDo10<br>MarOMDo11<br>MarOMDo12<br>MarOMDo13<br>MarOMDo14<br>MarOMDo15<br>MarOMDo16",null,null,null,"Mainland;Dounby",{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]},{"method":"addMarkers","args":[49.433969,-2.607858,{"iconUrl":{"data":"https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-green.png","index":0},"iconWidth":15,"iconHeight":25,"iconAnchorX":7,"iconAnchorY":25},null,null,{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},"<b>Coordinates:<\/b> 49.433969, -2.607858<br><b>Samples at this location:<\/b> 41<br><b>Countries:<\/b> Britain<br><b>Location:<\/b> Guernsey, Airport Edge Flugplatz Seitenrand<br><b>Sample IDs:<\/b><br>MarGBGAe01<br>MarGBGAe02<br>MarGBGAe03<br>MarGBGAe04<br>MarGBGAe05<br>MarGBGAe06<br>MarGBGAe07<br>MarGBGAe08<br>MarGBGAe09<br>MarGBGAe10<br>MarGBGAe11<br>MarGBGAe12<br>MarGBGAe13<br>MarGBGAe14<br>MarGBGAe15<br>MarGBGAe16<br>MarGBGAe17<br>MarGBGAe18<br>MarGBGAe19<br>MarGBGAe20<br>MarGBGAe21<br>MarGBGAe22<br>MarGBGAe23<br>MarGBGAe24<br>MarGBGAe25<br>MarGBGAe26<br>MarGBGAe27<br>MarGBGAe28<br>MarGBGAe29<br>MarGBGAe30<br>MarGBGAe31<br>MarGBGAe32<br>MarGBGAe33<br>MarGBGAe34<br>MarGBGAe35<br>MarGBGAe36<br>MarGBGAe37<br>MarGBGAe38<br>MarGBGAe39<br>MarGBGAe40<br>MarGBGAe41",null,null,null,"Guernsey, Airport Edge Flugplatz Seitenrand",{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]},{"method":"addMarkers","args":[49.471119,-2.537911,{"iconUrl":{"data":"https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-green.png","index":0},"iconWidth":15,"iconHeight":25,"iconAnchorX":7,"iconAnchorY":25},null,null,{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},"<b>Coordinates:<\/b> 49.471119, -2.537911<br><b>Samples at this location:<\/b> 36<br><b>Countries:<\/b> Britain<br><b>Location:<\/b> Chateau des Marais<br><b>Sample IDs:<\/b><br>MarGBGCh01<br>MarGBGCh02<br>MarGBGCh03<br>MarGBGCh04<br>MarGBGCh05<br>MarGBGCh06<br>MarGBGCh07<br>MarGBGCh08<br>MarGBGCh09<br>MarGBGCh10<br>MarGBGCh11<br>MarGBGCh12<br>MarGBGCh13<br>MarGBGCh14<br>MarGBGCh15<br>MarGBGCh16<br>MarGBGCh17<br>MarGBGCh18<br>MarGBGCh19<br>MarGBGCh20<br>MarGBGCh21<br>MarGBGCh22<br>MarGBGCh23<br>MarGBGCh24<br>MarGBGCh25<br>MarGBGCh26<br>MarGBGCh27<br>MarGBGCh28<br>MarGBGCh29<br>MarGBGCh30<br>MarGBGCh31<br>MarGBGCh32<br>MarGBGCh33<br>MarGBGCh34<br>MarGBGCh35<br>MarGBGCh36",null,null,null,"Chateau des Marais",{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]},{"method":"addMarkers","args":[49.504986,-2.536593,{"iconUrl":{"data":"https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-green.png","index":0},"iconWidth":15,"iconHeight":25,"iconAnchorX":7,"iconAnchorY":25},null,null,{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},"<b>Coordinates:<\/b> 49.504986, -2.536593<br><b>Samples at this location:<\/b> 23<br><b>Countries:<\/b> Britain<br><b>Location:<\/b> Guernsey, Royal Guernsey Golf Club<br><b>Sample IDs:<\/b><br>MarGBGGo01<br>MarGBGGo02<br>MarGBGGo03<br>MarGBGGo04<br>MarGBGGo05<br>MarGBGGo06<br>MarGBGGo07<br>MarGBGGo08<br>MarGBGGo09<br>MarGBGGo10<br>MarGBGGo11<br>MarGBGGo12<br>MarGBGGo13<br>MarGBGGo14<br>MarGBGGo15<br>MarGBGGo16<br>MarGBGGo17<br>MarGBGGo18<br>MarGBGGo19<br>MarGBGGo20<br>MarGBGGo21<br>MarGBGGo22<br>MarGBGGo23",null,null,null,"Guernsey, Royal Guernsey Golf Club",{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]},{"method":"addMarkers","args":[48.189683,-1.985915,{"iconUrl":{"data":"https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-green.png","index":0},"iconWidth":15,"iconHeight":25,"iconAnchorX":7,"iconAnchorY":25},null,null,{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},"<b>Coordinates:<\/b> 48.189683, -1.985915<br><b>Samples at this location:<\/b> 5<br><b>Countries:<\/b> France<br><b>Location:<\/b> Bedee<br><b>Sample IDs:<\/b><br>MarFBe01<br>MarFBe02<br>MarFBe03<br>MarFBe04<br>MarFBe05",null,null,null,"Bedee",{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]},{"method":"addMarkers","args":[48.71666667,-1.5,{"iconUrl":{"data":"https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-green.png","index":0},"iconWidth":15,"iconHeight":25,"iconAnchorX":7,"iconAnchorY":25},null,null,{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},"<b>Coordinates:<\/b> 48.71666667, -1.5<br><b>Samples at this location:<\/b> 13<br><b>Countries:<\/b> France<br><b>Location:<\/b> St.JeanleThomas;Jullouville<br><b>Sample IDs:<\/b><br>MarFSJ455<br>MarFSJ456<br>MarFSJ457<br>MarFSJ458<br>MarFSJ459<br>MarFSJ460<br>MarFSJ461<br>MarFSJ462<br>MarFSJ463<br>MarFSJ464<br>MarFSJ465<br>MarFSJ466<br>MarFSJ467",null,null,null,"St.JeanleThomas;Jullouville",{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]},{"method":"addMarkers","args":[49.402012,-1.196685,{"iconUrl":{"data":"https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-green.png","index":0},"iconWidth":15,"iconHeight":25,"iconAnchorX":7,"iconAnchorY":25},null,null,{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},"<b>Coordinates:<\/b> 49.402012, -1.196685<br><b>Samples at this location:<\/b> 22<br><b>Countries:<\/b> France<br><b>Location:<\/b> La Vienville, near Sainte-Marie-du-Mont<br><b>Sample IDs:<\/b><br>MarFVi01<br>MarFVi02<br>MarFVi03<br>MarFVi04<br>MarFVi05<br>MarFVi06<br>MarFVi07<br>MarFVi08<br>MarFVi09<br>MarFVi10<br>MarFVi11<br>MarFVi12<br>MarFVi13<br>MarFVi14<br>MarFVi15<br>MarFVi16<br>MarFVi17<br>MarFVi18<br>MarFVi19<br>MarFVi20<br>MarFVi21<br>MarFVi22",null,null,null,"La Vienville, near Sainte-Marie-du-Mont",{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]},{"method":"addMarkers","args":[49.227988,-1.120497,{"iconUrl":{"data":"https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-green.png","index":0},"iconWidth":15,"iconHeight":25,"iconAnchorX":7,"iconAnchorY":25},null,null,{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},"<b>Coordinates:<\/b> 49.227988, -1.120497<br><b>Samples at this location:<\/b> 5<br><b>Countries:<\/b> France<br><b>Location:<\/b> Saint-Fromond<br><b>Sample IDs:<\/b><br>MarFFo01<br>MarFFo02<br>MarFFo03<br>MarFFo04<br>MarFFo05",null,null,null,"Saint-Fromond",{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]},{"method":"addMarkers","args":[47.975864,1.68619,{"iconUrl":{"data":"https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-green.png","index":0},"iconWidth":15,"iconHeight":25,"iconAnchorX":7,"iconAnchorY":25},null,null,{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},"<b>Coordinates:<\/b> 47.975864, 1.68619<br><b>Samples at this location:<\/b> 82<br><b>Countries:<\/b> France<br><b>Location:<\/b> Saint-Sigismond45310,Orleans<br><b>Sample IDs:<\/b><br>MarFSi01<br>MarFSi02<br>MarFSi03<br>MarFSi04<br>MarFSi05<br>MarFSi06<br>MarFSi07<br>MarFSi08<br>MarFSi09<br>MarFSi10<br>MarFSi11<br>MarFSi12<br>MarFSi13<br>MarFSi14<br>MarFSi15<br>MarFSi16<br>MarFSi17<br>MarFSi18<br>MarFSi19<br>MarFSi20<br>MarFSi21<br>MarFSi22<br>MarFSi23<br>MarFSi24<br>MarFSi25<br>MarFSi26<br>MarFSi27<br>MarFSi28<br>MarFSi29<br>MarFSi30<br>MarFSi31<br>MarFSi32<br>MarFSi33<br>MarFSi34<br>MarFSi35<br>MarFSi36<br>MarFSi37<br>MarFSi38<br>MarFSi39<br>MarFSi40<br>MarFSi41<br>MarFSi42<br>MarFSi43<br>MarFSi44<br>MarFSi45<br>MarFSi46<br>MarFSi47<br>MarFSi48<br>MarFSi49<br>MarFSi50<br>MarFSi51<br>MarFSi52<br>MarFSi53<br>MarFSi54<br>MarFSi55<br>MarFSi56<br>MarFSi57<br>MarFSi58<br>MarFSi59<br>MarFSi60<br>MarFSi61<br>MarFSi62<br>MarFSi63<br>MarFSi64<br>MarFSi65<br>MarFSi66<br>MarFSi67<br>MarFSi68<br>MarFSi69<br>MarFSi70<br>MarFSi71<br>MarFSi72<br>MarFSi73<br>MarFSi74<br>MarFSi75<br>MarFSi76<br>MarFSi77<br>MarFSi78<br>MarFSi79<br>MarFSi80<br>MarFSi81<br>MarFSi82",null,null,null,"Saint-Sigismond45310,Orleans",{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]},{"method":"addLegend","args":[{"colors":["green","darkblue","orange","darkred"],"labels":["Spain/France/Belgien/Britain","Switzerland/Italy","Russia/Czech/Poland","Other"],"na_color":null,"na_label":"NA","opacity":1,"position":"bottomleft","type":"unknown","title":"Country color","extra":null,"layerId":null,"className":"info legend","group":null}]}],"setView":[[49.2662630610073,10.63402858121168],5,[]],"limits":{"lat":[40.59966,59.323171],"lng":[-5.66137,41.41666667]}},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+<p>The map below shows the geographic distribution of samples selected for the first round of sequencing, as well as those potentially intended for a second round (to be updated).</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(leaflet)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(leaflet.minicharts)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(widgetframe)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sf)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(RColorBrewer)</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(xfun)</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(writexl)</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Read and clean</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>raw_lines <span class="ot">&lt;-</span> <span class="fu">readLines</span>(<span class="st">"onlyMicrotus_B_MicrotusSamplesV426.txt"</span>, <span class="at">encoding =</span> <span class="st">"latin1"</span>)</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>clean_lines <span class="ot">&lt;-</span> <span class="fu">iconv</span>(raw_lines, <span class="at">from =</span> <span class="st">"latin1"</span>, <span class="at">to =</span> <span class="st">"UTF-8"</span>, <span class="at">sub =</span> <span class="st">""</span>)</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a><span class="fu">writeLines</span>(clean_lines, <span class="st">"onlyMicrotus_B_MicrotusSamplesV426_cleaned.txt"</span>)</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>rawTable <span class="ot">&lt;-</span> <span class="fu">read_tsv</span>(<span class="st">"onlyMicrotus_B_MicrotusSamplesV426_cleaned.txt"</span>)</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Columns to use</span></span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>cols <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Genus"</span>, <span class="st">"Species"</span>, <span class="st">"Samplinglocation"</span>, <span class="st">"Country"</span>, <span class="st">"Sample number (on tube or bag)"</span>,</span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>          <span class="st">"Individual number"</span>, <span class="st">"Extraction y/n?"</span>, <span class="st">"Place of capture"</span>, <span class="st">"Latitude"</span>, <span class="st">"Longitude"</span>,</span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>          <span class="st">"Specimen-20"</span>, <span class="st">"DNADNA_.Number.in..20"</span>, <span class="st">"RNARNA_.Number.in..80"</span>)</span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>Data <span class="ot">&lt;-</span> rawTable[, cols]</span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a><span class="co"># Filter species</span></span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a>arvalis_data <span class="ot">&lt;-</span> Data <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Species <span class="sc">==</span> <span class="st">"arvalis"</span>)</span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a><span class="co"># Clean coordinates</span></span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a>arvalis_data<span class="sc">$</span>Longitude <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="st">"\u00A0"</span>, <span class="st">""</span>, arvalis_data<span class="sc">$</span>Longitude)</span>
+<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a>arvalis_data<span class="sc">$</span>Latitude <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="st">"\u00A0"</span>, <span class="st">""</span>, arvalis_data<span class="sc">$</span>Latitude)</span>
+<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a>arvalis_data<span class="sc">$</span>Longitude <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">as.character</span>(arvalis_data<span class="sc">$</span>Longitude))</span>
+<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a>arvalis_data<span class="sc">$</span>Latitude <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">as.character</span>(arvalis_data<span class="sc">$</span>Latitude))</span>
+<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a><span class="co"># Sample lists</span></span>
+<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a>add_samples <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"MarGBGGo01"</span>,<span class="st">"MarGBGCh01"</span>,<span class="st">"MarGBGAe01"</span>, <span class="co"># Guernsey</span></span>
+<span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a>                 <span class="st">"MarFFo01"</span>, <span class="st">"MarFBe01"</span>, <span class="st">"MarFVi01"</span>, <span class="st">"MarFSJ455"</span>, <span class="st">"MarFSi01"</span>,</span>
+<span id="cb3-37"><a href="#cb3-37" aria-hidden="true" tabindex="-1"></a>                 <span class="st">"MarFTh478"</span>, <span class="co"># continent</span></span>
+<span id="cb3-38"><a href="#cb3-38" aria-hidden="true" tabindex="-1"></a>                 <span class="st">"MarOMDo01"</span>, <span class="st">"MarOMSw01"</span>, <span class="st">"MarOMWr01"</span>, <span class="st">"MarOMPs01"</span>) <span class="co"># Orkney</span></span>
+<span id="cb3-39"><a href="#cb3-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-40"><a href="#cb3-40" aria-hidden="true" tabindex="-1"></a>WangHeckel2025 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"BSt095"</span>, <span class="st">"BVe061"</span>, <span class="st">"FBv02"</span>, <span class="st">"FCc02"</span>, <span class="st">"FDa504"</span>, <span class="st">"FFr549"</span>, <span class="st">"FGr14"</span>,</span>
+<span id="cb3-41"><a href="#cb3-41" aria-hidden="true" tabindex="-1"></a>                    <span class="st">"FMc03"</span>, <span class="st">"FOg02"</span>, <span class="st">"FPi555"</span>, <span class="st">"FSt24"</span>, <span class="st">"OBSO234"</span>, <span class="st">"OBWs01"</span>,</span>
+<span id="cb3-42"><a href="#cb3-42" aria-hidden="true" tabindex="-1"></a>                    <span class="st">"OEOs14"</span>, <span class="st">"OEOs15"</span>, <span class="st">"OMBr149"</span>, <span class="st">"OMHo277"</span>, <span class="st">"ORGs21"</span>, <span class="st">"ORWa268"</span>,</span>
+<span id="cb3-43"><a href="#cb3-43" aria-hidden="true" tabindex="-1"></a>                    <span class="st">"OSaLi257"</span>, <span class="st">"OSaNe01"</span>, <span class="st">"OSJC01"</span>, <span class="st">"OSWi166"</span>, <span class="st">"OWLs033"</span>, <span class="st">"OWPg01"</span>)</span>
+<span id="cb3-44"><a href="#cb3-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-45"><a href="#cb3-45" aria-hidden="true" tabindex="-1"></a>Wang2023 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"BSt095"</span>, <span class="st">"BVe061"</span>, <span class="st">"FDa504"</span>, <span class="st">"FFr549"</span>, <span class="st">"FMc03"</span>, <span class="st">"FPi555"</span>, <span class="st">"Ft24"</span>,</span>
+<span id="cb3-46"><a href="#cb3-46" aria-hidden="true" tabindex="-1"></a>              <span class="st">"FA01"</span>, <span class="st">"FCh05"</span>, <span class="st">"FTh497"</span>, <span class="st">"EMq03"</span>, <span class="st">"ESa08"</span>, <span class="st">"ESAv05"</span>, <span class="st">"FM05"</span>, <span class="st">"OBSO234"</span>,</span>
+<span id="cb3-47"><a href="#cb3-47" aria-hidden="true" tabindex="-1"></a>              <span class="st">"OBWs01"</span>, <span class="st">"OBWs02"</span>, <span class="st">"OEOs14"</span>, <span class="st">"OEOs15"</span>, <span class="st">"OMBr149"</span>, <span class="st">"OMHo277"</span>, <span class="st">"OMSe194"</span>,</span>
+<span id="cb3-48"><a href="#cb3-48" aria-hidden="true" tabindex="-1"></a>              <span class="st">"OMSO221"</span>, <span class="st">"OMSQ273"</span>, <span class="st">"ORGs21"</span>, <span class="st">"ORNe205"</span>, <span class="st">"ORWa268"</span>, <span class="st">"OSaLi257"</span>, <span class="st">"OSaNe01"</span>,</span>
+<span id="cb3-49"><a href="#cb3-49" aria-hidden="true" tabindex="-1"></a>              <span class="st">"OSaWh256"</span>, <span class="st">"OSGr134"</span>, <span class="st">"OSJC01"</span>, <span class="st">"OSWi166"</span>, <span class="st">"OWLs033"</span>, <span class="st">"OWNe051"</span>, <span class="st">"OWPg01"</span>,</span>
+<span id="cb3-50"><a href="#cb3-50" aria-hidden="true" tabindex="-1"></a>              <span class="st">"CHBo17"</span>, <span class="st">"CHVa02"</span>, <span class="st">"ISc01"</span>, <span class="st">"CZD02"</span>, <span class="st">"PSr06"</span>, <span class="st">"RuKo01"</span>, <span class="st">"DAb06"</span>, <span class="st">"DWa04"</span>, <span class="st">"He42"</span>)</span>
+<span id="cb3-51"><a href="#cb3-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-52"><a href="#cb3-52" aria-hidden="true" tabindex="-1"></a>published <span class="ot">&lt;-</span> <span class="fu">unique</span>(<span class="fu">c</span>(WangHeckel2025, Wang2023))</span>
+<span id="cb3-53"><a href="#cb3-53" aria-hidden="true" tabindex="-1"></a>published <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">"Mar"</span>, published)</span>
+<span id="cb3-54"><a href="#cb3-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-55"><a href="#cb3-55" aria-hidden="true" tabindex="-1"></a><span class="co"># Mark published and to-add samples</span></span>
+<span id="cb3-56"><a href="#cb3-56" aria-hidden="true" tabindex="-1"></a>arvalis_data <span class="ot">&lt;-</span> arvalis_data <span class="sc">%&gt;%</span></span>
+<span id="cb3-57"><a href="#cb3-57" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb3-58"><a href="#cb3-58" aria-hidden="true" tabindex="-1"></a>    <span class="at">Published =</span> <span class="st">`</span><span class="at">Individual number</span><span class="st">`</span> <span class="sc">%in%</span> published,</span>
+<span id="cb3-59"><a href="#cb3-59" aria-hidden="true" tabindex="-1"></a>    <span class="at">Add_marked =</span> <span class="st">`</span><span class="at">Individual number</span><span class="st">`</span> <span class="sc">%in%</span> add_samples</span>
+<span id="cb3-60"><a href="#cb3-60" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb3-61"><a href="#cb3-61" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-62"><a href="#cb3-62" aria-hidden="true" tabindex="-1"></a><span class="co"># Assign color based on country group</span></span>
+<span id="cb3-63"><a href="#cb3-63" aria-hidden="true" tabindex="-1"></a>arvalis_data <span class="ot">&lt;-</span> arvalis_data <span class="sc">%&gt;%</span></span>
+<span id="cb3-64"><a href="#cb3-64" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb3-65"><a href="#cb3-65" aria-hidden="true" tabindex="-1"></a>    <span class="at">Country_group_color =</span> <span class="fu">case_when</span>(</span>
+<span id="cb3-66"><a href="#cb3-66" aria-hidden="true" tabindex="-1"></a>      Country <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Spain"</span>, <span class="st">"France"</span>, <span class="st">"Belgien"</span>, <span class="st">"Orkney Island"</span>, <span class="st">"Britain"</span>) <span class="sc">~</span> <span class="st">"green"</span>,</span>
+<span id="cb3-67"><a href="#cb3-67" aria-hidden="true" tabindex="-1"></a>      Country <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Switzerland"</span>, <span class="st">"Italy"</span>) <span class="sc">~</span> <span class="st">"darkblue"</span>,</span>
+<span id="cb3-68"><a href="#cb3-68" aria-hidden="true" tabindex="-1"></a>      Country <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Russia"</span>, <span class="st">"Czech Republic"</span>, <span class="st">"Poland"</span>) <span class="sc">~</span> <span class="st">"orange"</span>,</span>
+<span id="cb3-69"><a href="#cb3-69" aria-hidden="true" tabindex="-1"></a>      <span class="cn">TRUE</span> <span class="sc">~</span> <span class="st">"darkred"</span></span>
+<span id="cb3-70"><a href="#cb3-70" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb3-71"><a href="#cb3-71" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb3-72"><a href="#cb3-72" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-73"><a href="#cb3-73" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-74"><a href="#cb3-74" aria-hidden="true" tabindex="-1"></a><span class="co"># Summarise coordinates</span></span>
+<span id="cb3-75"><a href="#cb3-75" aria-hidden="true" tabindex="-1"></a>coords_summary <span class="ot">&lt;-</span> arvalis_data <span class="sc">%&gt;%</span></span>
+<span id="cb3-76"><a href="#cb3-76" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(Latitude), <span class="sc">!</span><span class="fu">is.na</span>(Longitude)) <span class="sc">%&gt;%</span></span>
+<span id="cb3-77"><a href="#cb3-77" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Longitude, Latitude) <span class="sc">%&gt;%</span></span>
+<span id="cb3-78"><a href="#cb3-78" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb3-79"><a href="#cb3-79" aria-hidden="true" tabindex="-1"></a>    <span class="at">sample_count =</span> <span class="fu">n</span>(),</span>
+<span id="cb3-80"><a href="#cb3-80" aria-hidden="true" tabindex="-1"></a>    <span class="at">countries =</span> <span class="fu">paste</span>(<span class="fu">unique</span>(Country), <span class="at">collapse =</span> <span class="st">", "</span>),</span>
+<span id="cb3-81"><a href="#cb3-81" aria-hidden="true" tabindex="-1"></a>    <span class="at">Location =</span> <span class="fu">first</span>(Samplinglocation),</span>
+<span id="cb3-82"><a href="#cb3-82" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="fu">first</span>(Country_group_color),</span>
+<span id="cb3-83"><a href="#cb3-83" aria-hidden="true" tabindex="-1"></a>    <span class="at">has_add_sample =</span> <span class="fu">any</span>(Add_marked),</span>
+<span id="cb3-84"><a href="#cb3-84" aria-hidden="true" tabindex="-1"></a>    <span class="at">has_published =</span> <span class="fu">any</span>(Published),</span>
+<span id="cb3-85"><a href="#cb3-85" aria-hidden="true" tabindex="-1"></a>    <span class="at">sample_names =</span> <span class="fu">list</span>(<span class="st">`</span><span class="at">Individual number</span><span class="st">`</span>),</span>
+<span id="cb3-86"><a href="#cb3-86" aria-hidden="true" tabindex="-1"></a>    <span class="at">.groups =</span> <span class="st">"drop"</span></span>
+<span id="cb3-87"><a href="#cb3-87" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb3-88"><a href="#cb3-88" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rowwise</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb3-89"><a href="#cb3-89" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb3-90"><a href="#cb3-90" aria-hidden="true" tabindex="-1"></a>    <span class="at">samples_colored =</span> <span class="fu">paste</span>(sample_names, <span class="at">collapse =</span> <span class="st">"&lt;br&gt;"</span>)</span>
+<span id="cb3-91"><a href="#cb3-91" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb3-92"><a href="#cb3-92" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span>
+<span id="cb3-93"><a href="#cb3-93" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-94"><a href="#cb3-94" aria-hidden="true" tabindex="-1"></a><span class="co"># Create leaflet map</span></span>
+<span id="cb3-95"><a href="#cb3-95" aria-hidden="true" tabindex="-1"></a>map <span class="ot">&lt;-</span> <span class="fu">leaflet</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb3-96"><a href="#cb3-96" aria-hidden="true" tabindex="-1"></a>  <span class="fu">addTiles</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb3-97"><a href="#cb3-97" aria-hidden="true" tabindex="-1"></a>  <span class="fu">setView</span>(<span class="at">lat =</span> <span class="fu">mean</span>(coords_summary<span class="sc">$</span>Latitude), <span class="at">lng =</span> <span class="fu">mean</span>(coords_summary<span class="sc">$</span>Longitude), <span class="at">zoom =</span> <span class="dv">5</span>)</span>
+<span id="cb3-98"><a href="#cb3-98" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-99"><a href="#cb3-99" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-100"><a href="#cb3-100" aria-hidden="true" tabindex="-1"></a><span class="co"># Add published samples as circles</span></span>
+<span id="cb3-101"><a href="#cb3-101" aria-hidden="true" tabindex="-1"></a>map <span class="ot">&lt;-</span> map <span class="sc">%&gt;%</span></span>
+<span id="cb3-102"><a href="#cb3-102" aria-hidden="true" tabindex="-1"></a>  <span class="fu">addCircleMarkers</span>(</span>
+<span id="cb3-103"><a href="#cb3-103" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> coords_summary <span class="sc">%&gt;%</span> <span class="fu">filter</span>(has_published),</span>
+<span id="cb3-104"><a href="#cb3-104" aria-hidden="true" tabindex="-1"></a>    <span class="at">lng =</span> <span class="sc">~</span>Longitude,</span>
+<span id="cb3-105"><a href="#cb3-105" aria-hidden="true" tabindex="-1"></a>    <span class="at">lat =</span> <span class="sc">~</span>Latitude,</span>
+<span id="cb3-106"><a href="#cb3-106" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="sc">~</span>color,</span>
+<span id="cb3-107"><a href="#cb3-107" aria-hidden="true" tabindex="-1"></a>    <span class="at">radius =</span> <span class="dv">6</span>,</span>
+<span id="cb3-108"><a href="#cb3-108" aria-hidden="true" tabindex="-1"></a>    <span class="at">weight =</span> <span class="dv">1</span>,</span>
+<span id="cb3-109"><a href="#cb3-109" aria-hidden="true" tabindex="-1"></a>    <span class="at">opacity =</span> <span class="dv">1</span>,</span>
+<span id="cb3-110"><a href="#cb3-110" aria-hidden="true" tabindex="-1"></a>    <span class="at">fillOpacity =</span> <span class="dv">1</span>,</span>
+<span id="cb3-111"><a href="#cb3-111" aria-hidden="true" tabindex="-1"></a>    <span class="at">label =</span> <span class="sc">~</span>Location,</span>
+<span id="cb3-112"><a href="#cb3-112" aria-hidden="true" tabindex="-1"></a>    <span class="at">popup =</span> <span class="sc">~</span><span class="fu">paste0</span>(</span>
+<span id="cb3-113"><a href="#cb3-113" aria-hidden="true" tabindex="-1"></a>      <span class="st">"&lt;b&gt;Coordinates:&lt;/b&gt; "</span>, Latitude, <span class="st">", "</span>, Longitude, <span class="st">"&lt;br&gt;"</span>,</span>
+<span id="cb3-114"><a href="#cb3-114" aria-hidden="true" tabindex="-1"></a>      <span class="st">"&lt;b&gt;Samples at this location:&lt;/b&gt; "</span>, sample_count, <span class="st">"&lt;br&gt;"</span>,</span>
+<span id="cb3-115"><a href="#cb3-115" aria-hidden="true" tabindex="-1"></a>      <span class="st">"&lt;b&gt;Countries:&lt;/b&gt; "</span>, countries, <span class="st">"&lt;br&gt;"</span>,</span>
+<span id="cb3-116"><a href="#cb3-116" aria-hidden="true" tabindex="-1"></a>      <span class="st">"&lt;b&gt;Location:&lt;/b&gt; "</span>, Location, <span class="st">"&lt;br&gt;"</span>,</span>
+<span id="cb3-117"><a href="#cb3-117" aria-hidden="true" tabindex="-1"></a>      <span class="st">"&lt;b&gt;Sample IDs:&lt;/b&gt;&lt;br&gt;"</span>, samples_colored</span>
+<span id="cb3-118"><a href="#cb3-118" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb3-119"><a href="#cb3-119" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb3-120"><a href="#cb3-120" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-121"><a href="#cb3-121" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-122"><a href="#cb3-122" aria-hidden="true" tabindex="-1"></a>small_icon <span class="ot">&lt;-</span> <span class="fu">makeIcon</span>(</span>
+<span id="cb3-123"><a href="#cb3-123" aria-hidden="true" tabindex="-1"></a>  <span class="at">iconUrl =</span> <span class="st">"https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-green.png"</span>,</span>
+<span id="cb3-124"><a href="#cb3-124" aria-hidden="true" tabindex="-1"></a>  <span class="at">shadowUrl =</span> <span class="st">"https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-shadow.png"</span>,</span>
+<span id="cb3-125"><a href="#cb3-125" aria-hidden="true" tabindex="-1"></a>  <span class="at">iconWidth =</span> <span class="dv">15</span>,   <span class="co"># smaller width (default is 25)</span></span>
+<span id="cb3-126"><a href="#cb3-126" aria-hidden="true" tabindex="-1"></a>  <span class="at">iconHeight =</span> <span class="dv">25</span>,  <span class="co"># smaller height (default is 41)</span></span>
+<span id="cb3-127"><a href="#cb3-127" aria-hidden="true" tabindex="-1"></a>  <span class="at">iconAnchorX =</span> <span class="dv">7</span>,  <span class="co"># adjust anchor point accordingly (usually half of width)</span></span>
+<span id="cb3-128"><a href="#cb3-128" aria-hidden="true" tabindex="-1"></a>  <span class="at">iconAnchorY =</span> <span class="dv">25</span>  <span class="co"># usually equals iconHeight</span></span>
+<span id="cb3-129"><a href="#cb3-129" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb3-130"><a href="#cb3-130" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-131"><a href="#cb3-131" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-132"><a href="#cb3-132" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-133"><a href="#cb3-133" aria-hidden="true" tabindex="-1"></a><span class="co"># Add add-marked samples as colored markers with popups (no rectangles)</span></span>
+<span id="cb3-134"><a href="#cb3-134" aria-hidden="true" tabindex="-1"></a><span class="co"># We'll use leaflet icons matching colors for markers</span></span>
+<span id="cb3-135"><a href="#cb3-135" aria-hidden="true" tabindex="-1"></a>marker_icons <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
+<span id="cb3-136"><a href="#cb3-136" aria-hidden="true" tabindex="-1"></a>  <span class="at">green =</span> <span class="fu">makeIcon</span>(<span class="at">iconUrl =</span> <span class="st">"https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-green.png"</span>, <span class="at">iconWidth =</span> <span class="dv">15</span>, <span class="at">iconHeight =</span> <span class="dv">25</span>, <span class="at">iconAnchorX =</span> <span class="dv">7</span>, <span class="at">iconAnchorY =</span> <span class="dv">25</span>),</span>
+<span id="cb3-137"><a href="#cb3-137" aria-hidden="true" tabindex="-1"></a>  <span class="at">blue =</span> <span class="fu">makeIcon</span>(<span class="at">iconUrl =</span> <span class="st">"https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-blue.png"</span>, <span class="at">iconWidth =</span> <span class="dv">15</span>, <span class="at">iconHeight =</span> <span class="dv">25</span>, <span class="at">iconAnchorX =</span> <span class="dv">7</span>, <span class="at">iconAnchorY =</span> <span class="dv">25</span>),</span>
+<span id="cb3-138"><a href="#cb3-138" aria-hidden="true" tabindex="-1"></a>  <span class="at">yellow =</span> <span class="fu">makeIcon</span>(<span class="at">iconUrl =</span> <span class="st">"https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-yellow.png"</span>, <span class="at">iconWidth =</span> <span class="dv">15</span>, <span class="at">iconHeight =</span> <span class="dv">25</span>, <span class="at">iconAnchorX =</span> <span class="dv">7</span>, <span class="at">iconAnchorY =</span> <span class="dv">25</span>),</span>
+<span id="cb3-139"><a href="#cb3-139" aria-hidden="true" tabindex="-1"></a>  <span class="at">black =</span> <span class="fu">makeIcon</span>(<span class="at">iconUrl =</span> <span class="st">"https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-black.png"</span>, <span class="at">iconWidth =</span> <span class="dv">15</span>, <span class="at">iconHeight =</span> <span class="dv">25</span>, <span class="at">iconAnchorX =</span> <span class="dv">7</span>, <span class="at">iconAnchorY =</span> <span class="dv">25</span>))</span>
+<span id="cb3-140"><a href="#cb3-140" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-141"><a href="#cb3-141" aria-hidden="true" tabindex="-1"></a>add_sample_points <span class="ot">&lt;-</span> coords_summary <span class="sc">%&gt;%</span> <span class="fu">filter</span>(has_add_sample)</span>
+<span id="cb3-142"><a href="#cb3-142" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-143"><a href="#cb3-143" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="fu">seq_len</span>(<span class="fu">nrow</span>(add_sample_points))) {</span>
+<span id="cb3-144"><a href="#cb3-144" aria-hidden="true" tabindex="-1"></a>  col <span class="ot">&lt;-</span> add_sample_points<span class="sc">$</span>color[i]</span>
+<span id="cb3-145"><a href="#cb3-145" aria-hidden="true" tabindex="-1"></a>  icon <span class="ot">&lt;-</span> marker_icons[[col]]</span>
+<span id="cb3-146"><a href="#cb3-146" aria-hidden="true" tabindex="-1"></a>  popup_html <span class="ot">&lt;-</span> <span class="fu">paste0</span>(</span>
+<span id="cb3-147"><a href="#cb3-147" aria-hidden="true" tabindex="-1"></a>    <span class="st">"&lt;b&gt;Coordinates:&lt;/b&gt; "</span>, add_sample_points<span class="sc">$</span>Latitude[i], <span class="st">", "</span>, add_sample_points<span class="sc">$</span>Longitude[i], <span class="st">"&lt;br&gt;"</span>,</span>
+<span id="cb3-148"><a href="#cb3-148" aria-hidden="true" tabindex="-1"></a>    <span class="st">"&lt;b&gt;Samples at this location:&lt;/b&gt; "</span>, add_sample_points<span class="sc">$</span>sample_count[i], <span class="st">"&lt;br&gt;"</span>,</span>
+<span id="cb3-149"><a href="#cb3-149" aria-hidden="true" tabindex="-1"></a>    <span class="st">"&lt;b&gt;Countries:&lt;/b&gt; "</span>, add_sample_points<span class="sc">$</span>countries[i], <span class="st">"&lt;br&gt;"</span>,</span>
+<span id="cb3-150"><a href="#cb3-150" aria-hidden="true" tabindex="-1"></a>    <span class="st">"&lt;b&gt;Location:&lt;/b&gt; "</span>, add_sample_points<span class="sc">$</span>Location[i], <span class="st">"&lt;br&gt;"</span>,</span>
+<span id="cb3-151"><a href="#cb3-151" aria-hidden="true" tabindex="-1"></a>    <span class="st">"&lt;b&gt;Sample IDs:&lt;/b&gt;&lt;br&gt;"</span>, add_sample_points<span class="sc">$</span>samples_colored[i]</span>
+<span id="cb3-152"><a href="#cb3-152" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb3-153"><a href="#cb3-153" aria-hidden="true" tabindex="-1"></a>  map <span class="ot">&lt;-</span> <span class="fu">addMarkers</span>(</span>
+<span id="cb3-154"><a href="#cb3-154" aria-hidden="true" tabindex="-1"></a>    map,</span>
+<span id="cb3-155"><a href="#cb3-155" aria-hidden="true" tabindex="-1"></a>    <span class="at">lng =</span> add_sample_points<span class="sc">$</span>Longitude[i],</span>
+<span id="cb3-156"><a href="#cb3-156" aria-hidden="true" tabindex="-1"></a>    <span class="at">lat =</span> add_sample_points<span class="sc">$</span>Latitude[i],</span>
+<span id="cb3-157"><a href="#cb3-157" aria-hidden="true" tabindex="-1"></a>    <span class="at">icon =</span> icon,</span>
+<span id="cb3-158"><a href="#cb3-158" aria-hidden="true" tabindex="-1"></a>    <span class="at">popup =</span> popup_html,</span>
+<span id="cb3-159"><a href="#cb3-159" aria-hidden="true" tabindex="-1"></a>    <span class="at">label =</span> add_sample_points<span class="sc">$</span>Location[i]</span>
+<span id="cb3-160"><a href="#cb3-160" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb3-161"><a href="#cb3-161" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb3-162"><a href="#cb3-162" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-163"><a href="#cb3-163" aria-hidden="true" tabindex="-1"></a><span class="co"># Add legend manually</span></span>
+<span id="cb3-164"><a href="#cb3-164" aria-hidden="true" tabindex="-1"></a>map <span class="ot">&lt;-</span> map <span class="sc">%&gt;%</span></span>
+<span id="cb3-165"><a href="#cb3-165" aria-hidden="true" tabindex="-1"></a>  <span class="fu">addLegend</span>(</span>
+<span id="cb3-166"><a href="#cb3-166" aria-hidden="true" tabindex="-1"></a>    <span class="at">position =</span> <span class="st">"bottomleft"</span>,</span>
+<span id="cb3-167"><a href="#cb3-167" aria-hidden="true" tabindex="-1"></a>    <span class="at">colors =</span> <span class="fu">c</span>(<span class="st">"green"</span>, <span class="st">"darkblue"</span>, <span class="st">"orange"</span>, <span class="st">"darkred"</span>),</span>
+<span id="cb3-168"><a href="#cb3-168" aria-hidden="true" tabindex="-1"></a>    <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Spain/France/Belgien/Britain"</span>, <span class="st">"Switzerland/Italy"</span>, <span class="st">"Russia/Czech/Poland"</span>, <span class="st">"Other"</span>),</span>
+<span id="cb3-169"><a href="#cb3-169" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Country color"</span>,</span>
+<span id="cb3-170"><a href="#cb3-170" aria-hidden="true" tabindex="-1"></a>    <span class="at">opacity =</span> <span class="dv">1</span></span>
+<span id="cb3-171"><a href="#cb3-171" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell">
+<details class="code-fold">
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>map</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div class="leaflet html-widget html-fill-item" id="htmlwidget-837365d71e33cd91dee4" style="width:100%;height:464px;"></div>
+<script type="application/json" data-for="htmlwidget-837365d71e33cd91dee4">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"https://openstreetmap.org/copyright/\">OpenStreetMap<\/a>,  <a href=\"https://opendatacommons.org/licenses/odbl/\">ODbL<\/a>"}]},{"method":"addCircleMarkers","args":[[40.95909,40.59966,41.02467222,59.08333333,59.05,59.13333333,59.323171,59.130111,58.95,58.7564192,58.76666667,59.28333333,58.843491,58.81666667,58.85,59.23333333,59.177976,59.25,59.3,59.272946,43.31666667,49.26666667,46.116389,49.76666667,50.08333333,50.86666667,51.05769444,51.21791667,49.28364,46.36208333,48.18333333,46.805605,46.68058,47.43055,47.18443541,51.784528,46.05165,46.80605591,46.62605556,49.34011111,54.05,48.89,53.58333333,56.33333333],[-5.66137,-4.70519,-4.111694444,-3.3,-3.116666667,-3.05,-2.997709,-2.989777,-2.95,-2.9386647,-2.933333333,-2.933333333,-2.92363,-2.916666667,-2.916666667,-2.866666667,-2.759467,-2.583333333,-2.55,-2.4848175,-1.166666667,-0.433333333,0.346389,0.516666667,1.566666667,1.816666667,2.668777778,3.079277778,3.93997,4.215491667,6.016666667,6.164746,6.18723,6.742983333,6.822475117,7.633349,8.99273,9.399233475999999,10.7575,10.81938889,11.7,16.45638889,22.78333333,41.41666667],6,null,null,{"interactive":true,"className":"","stroke":true,"color":["green","green","green","green","green","green","green","green","green","green","green","green","green","green","green","green","green","green","green","green","green","green","green","green","green","green","darkred","darkred","green","green","green","green","green","green","green","darkred","darkblue","darkblue","darkblue","darkred","darkred","orange","orange","orange"],"weight":1,"opacity":1,"fill":true,"fillColor":["green","green","green","green","green","green","green","green","green","green","green","green","green","green","green","green","green","green","green","green","green","green","green","green","green","green","darkred","darkred","green","green","green","green","green","green","green","darkred","darkblue","darkblue","darkblue","darkred","darkred","orange","orange","orange"],"fillOpacity":1},null,null,["<b>Coordinates:<\/b> 40.95909, -5.66137<br><b>Samples at this location:<\/b> 1<br><b>Countries:<\/b> Spain<br><b>Location:<\/b> Salamanca,Spain<br><b>Sample IDs:<\/b><br>MarESa08","<b>Coordinates:<\/b> 40.59966, -4.70519<br><b>Samples at this location:<\/b> 2<br><b>Countries:<\/b> Spain<br><b>Location:<\/b> Avila,Spain<br><b>Sample IDs:<\/b><br>MarEAv04<br>MarESAv05","<b>Coordinates:<\/b> 41.02467222, -4.111694444<br><b>Samples at this location:<\/b> 30<br><b>Countries:<\/b> Spain<br><b>Location:<\/b> MatadeQuintanar<br><b>Sample IDs:<\/b><br>MarEMq01<br>MarEMq02<br>MarEMq03<br>MarEMq04<br>MarEMq05<br>MarEMq06<br>MarEMq07<br>MarEMq08<br>MarEMq09<br>MarEMq10<br>MarEMq11<br>MarEMq12<br>MarEMq13<br>MarEMq14<br>MarEMq15<br>MarEMq16<br>MarEMq17<br>MarEMq18<br>MarEMq19<br>MarEMq20<br>MarEMq21<br>MarEMq22<br>MarEMq23<br>MarEMq24<br>MarEMq25<br>MarEMq26<br>MarEMq27<br>MarEMq28<br>MarEMq29<br>MarEMq30","<b>Coordinates:<\/b> 59.08333333, -3.3<br><b>Samples at this location:<\/b> 5<br><b>Countries:<\/b> Orkney Island<br><b>Location:<\/b> OrkneyMainland;Sandwick-Bryameadow<br><b>Sample IDs:<\/b><br>MarOMBr149<br>MarOMBr240<br>MarOMBr241<br>MarOMBr242<br>MarOMBr243","<b>Coordinates:<\/b> 59.05, -3.116666667<br><b>Samples at this location:<\/b> 25<br><b>Countries:<\/b> Orkney Island<br><b>Location:<\/b> OrkneyMainland;Settiscarth<br><b>Sample IDs:<\/b><br>MarOMSe161<br>MarOMSe162<br>MarOMSe167<br>MarOMSe168<br>MarOMSe169<br>MarOMSe170<br>MarOMSe171<br>MarOMSe183<br>MarOMSe184<br>MarOMSe185<br>MarOMSe186<br>MarOMSe187<br>MarOMSe188<br>MarOMSe189<br>MarOMSe190<br>MarOMSe191<br>MarOMSe192<br>MarOMSe193<br>MarOMSe194<br>MarOMSe195<br>MarOMSe196<br>MarOMSe197<br>MarOMSe198<br>MarOMSe199<br>MarOMSe200","<b>Coordinates:<\/b> 59.13333333, -3.05<br><b>Samples at this location:<\/b> 1<br><b>Countries:<\/b> Orkney Island<br><b>Location:<\/b> Rousay;Newhouse<br><b>Sample IDs:<\/b><br>MarORNe205","<b>Coordinates:<\/b> 59.323171, -2.997709<br><b>Samples at this location:<\/b> 30<br><b>Countries:<\/b> Orkney Island<br><b>Location:<\/b> Westray;PierowallGolfClub<br><b>Sample IDs:<\/b><br>MarOWPg01<br>MarOWPg02<br>MarOWPg03<br>MarOWPg04<br>MarOWPg05<br>MarOWPg06<br>MarOWPg07<br>MarOWPg08<br>MarOWPg09<br>MarOWPg10<br>MarOWPg11<br>MarOWPg12<br>MarOWPg13<br>MarOWPg14<br>MarOWPg15<br>MarOWPg16<br>MarOWPg17<br>MarOWPg18<br>MarOWPg19<br>MarOWPg20<br>MarOWPg21<br>MarOWPg22<br>MarOWPg23<br>MarOWPg24<br>MarOWPg25<br>MarOWPg26<br>MarOWPg27<br>MarOWPg28<br>MarOWPg29<br>MarOWPg30","<b>Coordinates:<\/b> 59.130111, -2.989777<br><b>Samples at this location:<\/b> 31<br><b>Countries:<\/b> Orkney Island<br><b>Location:<\/b> Rousay;GarbagesiteinShortland<br><b>Sample IDs:<\/b><br>MarORGs01<br>MarORGs02<br>MarORGs03<br>MarORGs04<br>MarORGs05<br>MarORGs06<br>MarORGs07<br>MarORGs08<br>MarORGs09<br>MarORGs10<br>MarORGs11<br>MarORGs12<br>MarORGs13<br>MarORGs14<br>MarORGs15<br>MarORGs16<br>MarORGs17<br>MarORGs18<br>MarORGs19<br>MarORGs20<br>MarORGs21<br>MarORGs22<br>MarORGs23<br>MarORGs24<br>MarORGs25<br>MarORGs26<br>MarORGs27<br>MarORGs28<br>MarORGs29<br>MarORGs30<br>MarORGs31","<b>Coordinates:<\/b> 58.95, -2.95<br><b>Samples at this location:<\/b> 19<br><b>Countries:<\/b> Orkney Island<br><b>Location:<\/b> OrkneyMainland;St.Ola<br><b>Sample IDs:<\/b><br>MarOMSO216<br>MarOMSO217<br>MarOMSO218<br>MarOMSO221<br>MarOMSO222<br>MarOMSO223<br>MarOMSO224<br>MarOMSO227<br>MarOMSO228<br>MarOMSO229<br>MarOMSO232<br>MarOMSO245<br>MarOMSO246<br>MarOMSO247<br>MarOMSO248<br>MarOMSO250<br>MarOMSO283<br>MarOMSO284<br>MarOMSO289","<b>Coordinates:<\/b> 58.7564192, -2.9386647<br><b>Samples at this location:<\/b> 23<br><b>Countries:<\/b> Orkney Island<br><b>Location:<\/b> SouthRonaldsay;JohnCrossleyFarm<br><b>Sample IDs:<\/b><br>MarOSJC01<br>MarOSJC02<br>MarOSJC03<br>MarOSJC04<br>MarOSJC05<br>MarOSJC06<br>MarOSJC07<br>MarOSJC08<br>MarOSJC09<br>MarOSJC10<br>MarOSJC11<br>MarOSJC12<br>MarOSJC13<br>MarOSJC14<br>MarOSJC15<br>MarOSJC16<br>MarOSJC17<br>MarOSJC18<br>MarOSJC19<br>MarOSJC20<br>MarOSJC21<br>MarOSJC22<br>MarOSJC23","<b>Coordinates:<\/b> 58.76666667, -2.933333333<br><b>Samples at this location:<\/b> 19<br><b>Countries:<\/b> Orkney Island<br><b>Location:<\/b> SouthRonaldsay;WindWick<br><b>Sample IDs:<\/b><br>MarOSWi158<br>MarOSWi159<br>MarOSWi165<br>MarOSWi166<br>MarOSWi173<br>MarOSWi174<br>MarOSWi175<br>MarOSWi176<br>MarOSWi177<br>MarOSWi178<br>MarOSWi179<br>MarOSWi180<br>MarOSWi181<br>MarOSWi201<br>MarOSWi202<br>MarOSWi203<br>MarOSWi204<br>MarOSWi206<br>MarOSWi207","<b>Coordinates:<\/b> 59.28333333, -2.933333333<br><b>Samples at this location:<\/b> 21<br><b>Countries:<\/b> Orkney Island<br><b>Location:<\/b> Westray;LochofSwartmill<br><b>Sample IDs:<\/b><br>MarOWLs019<br>MarOWLs020<br>MarOWLs021<br>MarOWLs022<br>MarOWLs033<br>MarOWLs077<br>MarOWLs078<br>MarOWLs079<br>MarOWLs080<br>MarOWLs081<br>MarOWLs095<br>MarOWLs096<br>MarOWLs107<br>MarOWLs108<br>MarOWLs109<br>MarOWLs110<br>MarOWLs118<br>MarOWLs119<br>MarOWLs120<br>MarOWLs130<br>MarOWLs131","<b>Coordinates:<\/b> 58.843491, -2.92363<br><b>Samples at this location:<\/b> 18<br><b>Countries:<\/b> Orkney Island<br><b>Location:<\/b> Burray;Westshore<br><b>Sample IDs:<\/b><br>MarOBWs01<br>MarOBWs02<br>MarOBWs03<br>MarOBWs04<br>MarOBWs05<br>MarOBWs06<br>MarOBWs07<br>MarOBWs08<br>MarOBWs09<br>MarOBWs10<br>MarOBWs11<br>MarOBWs12<br>MarOBWs13<br>MarOBWs14<br>MarOBWs15<br>MarOBWs16<br>MarOBWs17<br>MarOBWs18","<b>Coordinates:<\/b> 58.81666667, -2.916666667<br><b>Samples at this location:<\/b> 20<br><b>Countries:<\/b> Orkney Island<br><b>Location:<\/b> SouthRonaldsay;Grimness<br><b>Sample IDs:<\/b><br>MarOSGr132<br>MarOSGr133<br>MarOSGr134<br>MarOSGr135<br>MarOSGr136<br>MarOSGr137<br>MarOSGr138<br>MarOSGr139<br>MarOSGr140<br>MarOSGr141<br>MarOSGr142<br>MarOSGr143<br>MarOSGr144<br>MarOSGr145<br>MarOSGr150<br>MarOSGr151<br>MarOSGr152<br>MarOSGr153<br>MarOSGr155<br>MarOSGr156","<b>Coordinates:<\/b> 58.85, -2.916666667<br><b>Samples at this location:<\/b> 2<br><b>Countries:<\/b> Orkney Island<br><b>Location:<\/b> Burray;Southtown<br><b>Sample IDs:<\/b><br>MarOBSO233<br>MarOBSO234","<b>Coordinates:<\/b> 59.23333333, -2.866666667<br><b>Samples at this location:<\/b> 23<br><b>Countries:<\/b> Orkney Island<br><b>Location:<\/b> Westray;Ness<br><b>Sample IDs:<\/b><br>MarOWNe032<br>MarOWNe051<br>MarOWNe052<br>MarOWNe071<br>MarOWNe076<br>MarOWNe091<br>MarOWNe092<br>MarOWNe093<br>MarOWNe103<br>MarOWNe104<br>MarOWNe105<br>MarOWNe114<br>MarOWNe115<br>MarOWNe116<br>MarOWNe117<br>MarOWNe121<br>MarOWNe122<br>MarOWNe123<br>MarOWNe124<br>MarOWNe125<br>MarOWNe126<br>MarOWNe127<br>MarOWNe128","<b>Coordinates:<\/b> 59.177976, -2.759467<br><b>Samples at this location:<\/b> 30<br><b>Countries:<\/b> Orkney Island<br><b>Location:<\/b> Eday;Originalsite<br><b>Sample IDs:<\/b><br>MarOEOs01<br>MarOEOs02<br>MarOEOs03<br>MarOEOs04<br>MarOEOs05<br>MarOEOs06<br>MarOEOs07<br>MarOEOs08<br>MarOEOs09<br>MarOEOs10<br>MarOEOs11<br>MarOEOs12<br>MarOEOs13<br>MarOEOs14<br>MarOEOs15<br>MarOEOs16<br>MarOEOs17<br>MarOEOs18<br>MarOEOs19<br>MarOEOs20<br>MarOEOs21<br>MarOEOs22<br>MarOEOs23<br>MarOEOs24<br>MarOEOs25<br>MarOEOs26<br>MarOEOs27<br>MarOEOs28<br>MarOEOs29<br>MarOEOs30","<b>Coordinates:<\/b> 59.25, -2.583333333<br><b>Samples at this location:<\/b> 6<br><b>Countries:<\/b> Orkney Island<br><b>Location:<\/b> Sanday;LittleSea<br><b>Sample IDs:<\/b><br>MarOSaLi257<br>MarOSaLi258<br>MarOSaLi266<br>MarOSaLi269<br>MarOSaLi278<br>MarOSaLi279","<b>Coordinates:<\/b> 59.3, -2.55<br><b>Samples at this location:<\/b> 15<br><b>Countries:<\/b> Orkney Island<br><b>Location:<\/b> Sanday;WhitemillBay<br><b>Sample IDs:<\/b><br>MarOSaWh252<br>MarOSaWh253<br>MarOSaWh254<br>MarOSaWh255<br>MarOSaWh256<br>MarOSaWh260<br>MarOSaWh261<br>MarOSaWh268<br>MarOSaWh270<br>MarOSaWh271<br>MarOSaWh272<br>MarOSaWh273<br>MarOSaWh274<br>MarOSaWh275<br>MarOSaWh282","<b>Coordinates:<\/b> 59.272946, -2.4848175<br><b>Samples at this location:<\/b> 44<br><b>Countries:<\/b> Orkney Island<br><b>Location:<\/b> Sanday;Newark<br><b>Sample IDs:<\/b><br>MarOSaNe01<br>MarOSaNe02<br>MarOSaNe03<br>MarOSaNe04<br>MarOSaNe05<br>MarOSaNe06<br>MarOSaNe07<br>MarOSaNe08<br>MarOSaNe09<br>MarOSaNe10<br>MarOSaNe11<br>MarOSaNe12<br>MarOSaNe13<br>MarOSaNe14<br>MarOSaNe15<br>MarOSaNe16<br>MarOSaNe17<br>MarOSaNe18<br>MarOSaNe19<br>MarOSaNe20<br>MarOSaNe21<br>MarOSaNe22<br>MarOSaNe23<br>MarOSaNe24<br>MarOSaNe25<br>MarOSaNe26<br>MarOSaNe27<br>MarOSaNe28<br>MarOSaNe29<br>MarOSaNe30<br>MarOSaNe31<br>MarOSaNe32<br>MarOSaNe33<br>MarOSaNe34<br>MarOSaNe35<br>MarOSaNe36<br>MarOSaNe37<br>MarOSaNe38<br>MarOSaNe39<br>MarOSaNe40<br>MarOSaNe41<br>MarOSaNe42<br>MarOSaNe43<br>MarOSaNe44","<b>Coordinates:<\/b> 43.31666667, -1.166666667<br><b>Samples at this location:<\/b> 2<br><b>Countries:<\/b> France<br><b>Location:<\/b> PaysBasque,Armendarits<br><b>Sample IDs:<\/b><br>MarFA01<br>MarFA02","<b>Coordinates:<\/b> 49.26666667, -0.433333333<br><b>Samples at this location:<\/b> 24<br><b>Countries:<\/b> France<br><b>Location:<\/b> Thaon;Caen<br><b>Sample IDs:<\/b><br>MarFTh478<br>MarFTh479<br>MarFTh480<br>MarFTh481<br>MarFTh482<br>MarFTh483<br>MarFTh484<br>MarFTh485<br>MarFTh486<br>MarFTh487<br>MarFTh488<br>MarFTh489<br>MarFTh490<br>MarFTh491<br>MarFTh492<br>MarFTh493<br>MarFTh494<br>MarFTh495<br>MarFTh496<br>MarFTh497<br>MarFTh498<br>MarFTh499<br>MarFTh500<br>MarFTh501","<b>Coordinates:<\/b> 46.116389, 0.346389<br><b>Samples at this location:<\/b> 11<br><b>Countries:<\/b> France<br><b>Location:<\/b> Chiz ,Deuxs vres<br><b>Sample IDs:<\/b><br>MarFCh05<br>MarFCh06<br>MarFCh07<br>MarFCh08<br>MarFCh09<br>MarFCh10<br>MarFCh11<br>MarFCh12<br>MarFCh13<br>MarFCh14<br>MarFCh15","<b>Coordinates:<\/b> 49.76666667, 0.516666667<br><b>Samples at this location:<\/b> 20<br><b>Countries:<\/b> France<br><b>Location:<\/b> Daubeuf;F camp<br><b>Sample IDs:<\/b><br>MarFDa503<br>MarFDa504<br>MarFDa505<br>MarFDa506<br>MarFDa507<br>MarFDa508<br>MarFDa509<br>MarFDa510<br>MarFDa511<br>MarFDa512<br>MarFDa513<br>MarFDa514<br>MarFDa515<br>MarFDa516<br>MarFDa517<br>MarFDa518<br>MarFDa519<br>MarFDa520<br>MarFDa521<br>MarFDa522","<b>Coordinates:<\/b> 50.08333333, 1.566666667<br><b>Samples at this location:<\/b> 26<br><b>Countries:<\/b> France<br><b>Location:<\/b> Fressenneville;Abbeville<br><b>Sample IDs:<\/b><br>MarFFr523<br>MarFFr524<br>MarFFr525<br>MarFFr526<br>MarFFr528<br>MarFFr529<br>MarFFr530<br>MarFFr531<br>MarFFr532<br>MarFFr533<br>MarFFr534<br>MarFFr535<br>MarFFr536<br>MarFFr537<br>MarFFr538<br>MarFFr539<br>MarFFr540<br>MarFFr541<br>MarFFr542<br>MarFFr543<br>MarFFr544<br>MarFFr545<br>MarFFr546<br>MarFFr547<br>MarFFr548<br>MarFFr549","<b>Coordinates:<\/b> 50.86666667, 1.816666667<br><b>Samples at this location:<\/b> 22<br><b>Countries:<\/b> France<br><b>Location:<\/b> Pihenl sGu nes;Calais<br><b>Sample IDs:<\/b><br>MarFPi555<br>MarFPi556<br>MarFPi557<br>MarFPi558<br>MarFPi559<br>MarFPi560<br>MarFPi561<br>MarFPi562<br>MarFPi563<br>MarFPi564<br>MarFPi565<br>MarFPi566<br>MarFPi567<br>MarFPi568<br>MarFPi569<br>MarFPi570<br>MarFPi571<br>MarFPi572<br>MarFPi573<br>MarFPi574<br>MarFPi575<br>MarFPi576","<b>Coordinates:<\/b> 51.05769444, 2.668777778<br><b>Samples at this location:<\/b> 26<br><b>Countries:<\/b> Belgium<br><b>Location:<\/b> Veurne<br><b>Sample IDs:<\/b><br>MarBVe061<br>MarBVe062<br>MarBVe063<br>MarBVe064<br>MarBVe065<br>MarBVe066<br>MarBVe067<br>MarBVe068<br>MarBVe069<br>MarBVe070<br>MarBVe071<br>MarBVe072<br>MarBVe073<br>MarBVe074<br>MarBVe075<br>MarBVe076<br>MarBVe077<br>MarBVe078<br>MarBVe098<br>MarBVe099<br>MarBVe100<br>MarBVe101<br>MarBVe102<br>MarBVe103<br>MarBVe104<br>MarBVe105","<b>Coordinates:<\/b> 51.21791667, 3.079277778<br><b>Samples at this location:<\/b> 27<br><b>Countries:<\/b> Belgium<br><b>Location:<\/b> Stalhille<br><b>Sample IDs:<\/b><br>MarBSt048<br>MarBSt049<br>MarBSt050<br>MarBSt051<br>MarBSt052<br>MarBSt053<br>MarBSt054<br>MarBSt055<br>MarBSt056<br>MarBSt057<br>MarBSt058<br>MarBSt059<br>MarBSt060<br>MarBSt084<br>MarBSt085<br>MarBSt086<br>MarBSt087<br>MarBSt088<br>MarBSt089<br>MarBSt090<br>MarBSt091<br>MarBSt092<br>MarBSt093<br>MarBSt094<br>MarBSt095<br>MarBSt096<br>MarBSt097","<b>Coordinates:<\/b> 49.28364, 3.93997<br><b>Samples at this location:<\/b> 5<br><b>Countries:<\/b> France<br><b>Location:<\/b> Maco<br><b>Sample IDs:<\/b><br>MarFMc01<br>MarFMc02<br>MarFMc03<br>MarFMc04<br>MarFMc05","<b>Coordinates:<\/b> 46.36208333, 4.215491667<br><b>Samples at this location:<\/b> 33<br><b>Countries:<\/b> France<br><b>Location:<\/b> Saint-JuliendeCivry<br><b>Sample IDs:<\/b><br>MarFSt01<br>MarFSt02<br>MarFSt03<br>MarFSt04<br>MarFSt05<br>MarFSt06<br>MarFSt07<br>MarFSt08<br>MarFSt09<br>MarFSt10<br>MarFSt11<br>MarFSt12<br>MarFSt13<br>MarFSt14<br>MarFSt15<br>MarFSt16<br>MarFSt17<br>MarFSt18<br>MarFSt19<br>MarFSt20<br>MarFSt21<br>MarFSt22<br>MarFSt23<br>MarFSt24<br>MarFSt25<br>MarFSt26<br>MarFSt27<br>MarFSt28<br>MarFSt29<br>MarFSt30<br>MarFSt31<br>MarFSt32<br>MarFSt33","<b>Coordinates:<\/b> 48.18333333, 6.016666667<br><b>Samples at this location:<\/b> 2<br><b>Countries:<\/b> France<br><b>Location:<\/b> Lorraine,Monthureux-le-Sec<br><b>Sample IDs:<\/b><br>MarFM05<br>MarFM06","<b>Coordinates:<\/b> 46.805605, 6.164746<br><b>Samples at this location:<\/b> 2<br><b>Countries:<\/b> France<br><b>Location:<\/b> Bonnevaux<br><b>Sample IDs:<\/b><br>MarFBv01<br>MarFBv02","<b>Coordinates:<\/b> 46.68058, 6.18723<br><b>Samples at this location:<\/b> 1<br><b>Countries:<\/b> France<br><b>Location:<\/b> Gr set<br><b>Sample IDs:<\/b><br>MarFGr14","<b>Coordinates:<\/b> 47.43055, 6.742983333<br><b>Samples at this location:<\/b> 7<br><b>Countries:<\/b> France<br><b>Location:<\/b> Orgeans<br><b>Sample IDs:<\/b><br>MarFOg01<br>MarFOg02<br>MarFOg03<br>MarFOg04<br>MarFOg05<br>MarFOg06<br>MarFOg07","<b>Coordinates:<\/b> 47.18443541, 6.822475117<br><b>Samples at this location:<\/b> 2<br><b>Countries:<\/b> France<br><b>Location:<\/b> Creux de CharquementF<br><b>Sample IDs:<\/b><br>MarFCc01<br>MarFCc02","<b>Coordinates:<\/b> 51.784528, 7.633349<br><b>Samples at this location:<\/b> 20<br><b>Countries:<\/b> Germany<br><b>Location:<\/b> Ascheberg<br><b>Sample IDs:<\/b><br>MarDAb01<br>MarDAb02<br>MarDAb03<br>MarDAb04<br>MarDAb05<br>MarDAb06<br>MarDAb07<br>MarDAb08<br>MarDAb09<br>MarDAb10<br>MarDAb11<br>MarDAb12<br>MarDAb13<br>MarDAb14<br>MarDAb15<br>MarDAb16<br>MarDAb17<br>MarDAb18<br>MarDAb19<br>MarDAb20","<b>Coordinates:<\/b> 46.05165, 8.99273<br><b>Samples at this location:<\/b> 1<br><b>Countries:<\/b> Switzerland<br><b>Location:<\/b> Villa,Ticino<br><b>Sample IDs:<\/b><br>MarCHVa02","<b>Coordinates:<\/b> 46.80605591, 9.399233476<br><b>Samples at this location:<\/b> 23<br><b>Countries:<\/b> Switzerland<br><b>Location:<\/b> BonaduzDEMAFabrik,Switzerland<br><b>Sample IDs:<\/b><br>MarCHBo15<br>MarCHBo16<br>MarCHBo17<br>MarCHBo18<br>MarCHBo19<br>MarCHBo20<br>MarCHBo21<br>MarCHBo22<br>MarCHBo23<br>MarCHBo24<br>MarCHBo25<br>MarCHBo26<br>MarCHBo27<br>MarCHBo28<br>MarCHBo29<br>MarCHBo30<br>MarCHBo31<br>MarCHBo32<br>MarCHBo33<br>MarCHBo34<br>MarCHBo35<br>MarCHBo36<br>MarCHBo37","<b>Coordinates:<\/b> 46.62605556, 10.7575<br><b>Samples at this location:<\/b> 29<br><b>Countries:<\/b> Italy<br><b>Location:<\/b> Schlanders(Silandro)<br><b>Sample IDs:<\/b><br>MarISc01<br>MarISc02<br>MarISc03<br>MarISc04<br>MarISc05<br>MarISC06<br>MarISC07<br>MarISC08<br>MarISC09<br>MarISC10<br>MarISC11<br>MarISC12<br>MarISC13<br>MarISC14<br>MarISC15<br>MarISC16<br>MarISC17<br>MarISC18<br>MarISC19<br>MarISC20<br>MarISC21<br>MarISC22<br>MarISC23<br>MarISC24<br>MarISC25<br>MarISC26<br>MarISC27<br>MarISC28<br>MarISC29","<b>Coordinates:<\/b> 49.34011111, 10.81938889<br><b>Samples at this location:<\/b> 9<br><b>Countries:<\/b> Germany<br><b>Location:<\/b> Heilsbronn,Weiterndorf<br><b>Sample IDs:<\/b><br>MarHe40<br>MarHe41<br>MarHe42<br>MarHe43<br>MarHe44<br>MarHe45<br>MarHe46<br>MarHe47<br>MarHe48","<b>Coordinates:<\/b> 54.05, 11.7<br><b>Samples at this location:<\/b> 6<br><b>Countries:<\/b> Germany<br><b>Location:<\/b> WarnowtalbeiLangenBr tz,12kmnordwestlichvonSchwerin,Germany<br><b>Sample IDs:<\/b><br>MarDWa01<br>MarDWa02<br>MarDWa03<br>MarDWa04<br>MarDWa05<br>MarDWa06","<b>Coordinates:<\/b> 48.89, 16.45638889<br><b>Samples at this location:<\/b> 30<br><b>Countries:<\/b> Czech Republic<br><b>Location:<\/b> Drnholec<br><b>Sample IDs:<\/b><br>MarCZD01<br>MarCZD02<br>MarCZD03<br>MarCZD04<br>MarCZD05<br>MarCZD06<br>MarCZD07<br>MarCZD08<br>MarCZD09<br>MarCZD10<br>MarCZD11<br>MarCZD12<br>MarCZD13<br>MarCZD14<br>MarCZD15<br>MarCZD16<br>MarCZD17<br>MarCZD18<br>MarCZD19<br>MarCZD20<br>MarCZD21<br>MarCZD22<br>MarCZD23<br>MarCZD24<br>MarCZD25<br>MarCZD26<br>MarCZD27<br>MarCZD28<br>MarCZD29<br>MarCZD30","<b>Coordinates:<\/b> 53.58333333, 22.78333333<br><b>Samples at this location:<\/b> 23<br><b>Countries:<\/b> Poland<br><b>Location:<\/b> Srodkowy<br><b>Sample IDs:<\/b><br>MarPSr01<br>MarPSr02<br>MarPSr03<br>MarPSr04<br>MarPSr05<br>MarPSr06<br>MarPSr07<br>MarPSr08<br>MarPSr09<br>MarPSr10<br>MarPSr11<br>MarPSr12<br>MarPSr13<br>MarPSr14<br>MarPSr15<br>MarPSr16<br>MarPSr17<br>MarPSr18<br>MarPSr19<br>MarPSr20<br>MarPSr21<br>MarPSr22<br>MarPSr23","<b>Coordinates:<\/b> 56.33333333, 41.41666667<br><b>Samples at this location:<\/b> 4<br><b>Countries:<\/b> Russia<br><b>Location:<\/b> Vladimirregion,Kovrov(Mar-M.obscurushybridzone)<br><b>Sample IDs:<\/b><br>MarRuKo01<br>MarRuKo02<br>MarRuKo03<br>MarRuKo04"],null,["Salamanca,Spain","Avila,Spain","MatadeQuintanar","OrkneyMainland;Sandwick-Bryameadow","OrkneyMainland;Settiscarth","Rousay;Newhouse","Westray;PierowallGolfClub","Rousay;GarbagesiteinShortland","OrkneyMainland;St.Ola","SouthRonaldsay;JohnCrossleyFarm","SouthRonaldsay;WindWick","Westray;LochofSwartmill","Burray;Westshore","SouthRonaldsay;Grimness","Burray;Southtown","Westray;Ness","Eday;Originalsite","Sanday;LittleSea","Sanday;WhitemillBay","Sanday;Newark","PaysBasque,Armendarits","Thaon;Caen","Chiz ,Deuxs vres","Daubeuf;F camp","Fressenneville;Abbeville","Pihenl sGu nes;Calais","Veurne","Stalhille","Maco","Saint-JuliendeCivry","Lorraine,Monthureux-le-Sec","Bonnevaux","Gr set","Orgeans","Creux de CharquementF","Ascheberg","Villa,Ticino","BonaduzDEMAFabrik,Switzerland","Schlanders(Silandro)","Heilsbronn,Weiterndorf","WarnowtalbeiLangenBr tz,12kmnordwestlichvonSchwerin,Germany","Drnholec","Srodkowy","Vladimirregion,Kovrov(Mar-M.obscurushybridzone)"],{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]},{"method":"addMarkers","args":[59.079469,-3.213577,{"iconUrl":{"data":"https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-green.png","index":0},"iconWidth":15,"iconHeight":25,"iconAnchorX":7,"iconAnchorY":25},null,null,{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},"<b>Coordinates:<\/b> 59.079469, -3.213577<br><b>Samples at this location:<\/b> 16<br><b>Countries:<\/b> Orkney Island<br><b>Location:<\/b> Mainland;Dounby<br><b>Sample IDs:<\/b><br>MarOMDo01<br>MarOMDo02<br>MarOMDo03<br>MarOMDo04<br>MarOMDo05<br>MarOMDo06<br>MarOMDo07<br>MarOMDo08<br>MarOMDo09<br>MarOMDo10<br>MarOMDo11<br>MarOMDo12<br>MarOMDo13<br>MarOMDo14<br>MarOMDo15<br>MarOMDo16",null,null,null,"Mainland;Dounby",{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]},{"method":"addMarkers","args":[58.947848,-3.129029,{"iconUrl":{"data":"https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-green.png","index":0},"iconWidth":15,"iconHeight":25,"iconAnchorX":7,"iconAnchorY":25},null,null,{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},"<b>Coordinates:<\/b> 58.947848, -3.129029<br><b>Samples at this location:<\/b> 8<br><b>Countries:<\/b> Orkney Island<br><b>Location:<\/b> Mainland;Swanbister<br><b>Sample IDs:<\/b><br>MarOMSw01<br>MarOMSw02<br>MarOMSw03<br>MarOMSw04<br>MarOMSw05<br>MarOMSw06<br>MarOMSw07<br>MarOMSw08",null,null,null,"Mainland;Swanbister",{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]},{"method":"addMarkers","args":[58.992397,-2.930615,{"iconUrl":{"data":"https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-green.png","index":0},"iconWidth":15,"iconHeight":25,"iconAnchorX":7,"iconAnchorY":25},null,null,{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},"<b>Coordinates:<\/b> 58.992397, -2.930615<br><b>Samples at this location:<\/b> 4<br><b>Countries:<\/b> Orkney Island<br><b>Location:<\/b> Mainland;WorkRoad<br><b>Sample IDs:<\/b><br>MarOMWr01<br>MarOMWr02<br>MarOMWr03<br>MarOMWr04",null,null,null,"Mainland;WorkRoad",{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]},{"method":"addMarkers","args":[58.923649,-2.847305,{"iconUrl":{"data":"https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-green.png","index":0},"iconWidth":15,"iconHeight":25,"iconAnchorX":7,"iconAnchorY":25},null,null,{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},"<b>Coordinates:<\/b> 58.923649, -2.847305<br><b>Samples at this location:<\/b> 26<br><b>Countries:<\/b> Orkney Island<br><b>Location:<\/b> Mainland;Ponysite<br><b>Sample IDs:<\/b><br>MarOMPs01<br>MarOMPs02<br>MarOMPs03<br>MarOMPs04<br>MarOMPs05<br>MarOMPs06<br>MarOMPs07<br>MarOMPs08<br>MarOMPs09<br>MarOMPs10<br>MarOMPs11<br>MarOMPs12<br>MarOMPs13<br>MarOMPs14<br>MarOMPs15<br>MarOMPs16<br>MarOMPs17<br>MarOMPs18<br>MarOMPs19<br>MarOMPs20<br>MarOMPs21<br>MarOMPs22<br>MarOMPs23<br>MarOMPs24<br>MarOMPs25<br>MarOMPs26",null,null,null,"Mainland;Ponysite",{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]},{"method":"addMarkers","args":[49.433969,-2.607858,{"iconUrl":{"data":"https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-green.png","index":0},"iconWidth":15,"iconHeight":25,"iconAnchorX":7,"iconAnchorY":25},null,null,{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},"<b>Coordinates:<\/b> 49.433969, -2.607858<br><b>Samples at this location:<\/b> 41<br><b>Countries:<\/b> Britain<br><b>Location:<\/b> Guernsey, Airport Edge Flugplatz Seitenrand<br><b>Sample IDs:<\/b><br>MarGBGAe01<br>MarGBGAe02<br>MarGBGAe03<br>MarGBGAe04<br>MarGBGAe05<br>MarGBGAe06<br>MarGBGAe07<br>MarGBGAe08<br>MarGBGAe09<br>MarGBGAe10<br>MarGBGAe11<br>MarGBGAe12<br>MarGBGAe13<br>MarGBGAe14<br>MarGBGAe15<br>MarGBGAe16<br>MarGBGAe17<br>MarGBGAe18<br>MarGBGAe19<br>MarGBGAe20<br>MarGBGAe21<br>MarGBGAe22<br>MarGBGAe23<br>MarGBGAe24<br>MarGBGAe25<br>MarGBGAe26<br>MarGBGAe27<br>MarGBGAe28<br>MarGBGAe29<br>MarGBGAe30<br>MarGBGAe31<br>MarGBGAe32<br>MarGBGAe33<br>MarGBGAe34<br>MarGBGAe35<br>MarGBGAe36<br>MarGBGAe37<br>MarGBGAe38<br>MarGBGAe39<br>MarGBGAe40<br>MarGBGAe41",null,null,null,"Guernsey, Airport Edge Flugplatz Seitenrand",{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]},{"method":"addMarkers","args":[49.471119,-2.537911,{"iconUrl":{"data":"https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-green.png","index":0},"iconWidth":15,"iconHeight":25,"iconAnchorX":7,"iconAnchorY":25},null,null,{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},"<b>Coordinates:<\/b> 49.471119, -2.537911<br><b>Samples at this location:<\/b> 36<br><b>Countries:<\/b> Britain<br><b>Location:<\/b> Chateau des Marais<br><b>Sample IDs:<\/b><br>MarGBGCh01<br>MarGBGCh02<br>MarGBGCh03<br>MarGBGCh04<br>MarGBGCh05<br>MarGBGCh06<br>MarGBGCh07<br>MarGBGCh08<br>MarGBGCh09<br>MarGBGCh10<br>MarGBGCh11<br>MarGBGCh12<br>MarGBGCh13<br>MarGBGCh14<br>MarGBGCh15<br>MarGBGCh16<br>MarGBGCh17<br>MarGBGCh18<br>MarGBGCh19<br>MarGBGCh20<br>MarGBGCh21<br>MarGBGCh22<br>MarGBGCh23<br>MarGBGCh24<br>MarGBGCh25<br>MarGBGCh26<br>MarGBGCh27<br>MarGBGCh28<br>MarGBGCh29<br>MarGBGCh30<br>MarGBGCh31<br>MarGBGCh32<br>MarGBGCh33<br>MarGBGCh34<br>MarGBGCh35<br>MarGBGCh36",null,null,null,"Chateau des Marais",{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]},{"method":"addMarkers","args":[49.504986,-2.536593,{"iconUrl":{"data":"https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-green.png","index":0},"iconWidth":15,"iconHeight":25,"iconAnchorX":7,"iconAnchorY":25},null,null,{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},"<b>Coordinates:<\/b> 49.504986, -2.536593<br><b>Samples at this location:<\/b> 23<br><b>Countries:<\/b> Britain<br><b>Location:<\/b> Guernsey, Royal Guernsey Golf Club<br><b>Sample IDs:<\/b><br>MarGBGGo01<br>MarGBGGo02<br>MarGBGGo03<br>MarGBGGo04<br>MarGBGGo05<br>MarGBGGo06<br>MarGBGGo07<br>MarGBGGo08<br>MarGBGGo09<br>MarGBGGo10<br>MarGBGGo11<br>MarGBGGo12<br>MarGBGGo13<br>MarGBGGo14<br>MarGBGGo15<br>MarGBGGo16<br>MarGBGGo17<br>MarGBGGo18<br>MarGBGGo19<br>MarGBGGo20<br>MarGBGGo21<br>MarGBGGo22<br>MarGBGGo23",null,null,null,"Guernsey, Royal Guernsey Golf Club",{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]},{"method":"addMarkers","args":[48.189683,-1.985915,{"iconUrl":{"data":"https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-green.png","index":0},"iconWidth":15,"iconHeight":25,"iconAnchorX":7,"iconAnchorY":25},null,null,{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},"<b>Coordinates:<\/b> 48.189683, -1.985915<br><b>Samples at this location:<\/b> 5<br><b>Countries:<\/b> France<br><b>Location:<\/b> Bedee<br><b>Sample IDs:<\/b><br>MarFBe01<br>MarFBe02<br>MarFBe03<br>MarFBe04<br>MarFBe05",null,null,null,"Bedee",{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]},{"method":"addMarkers","args":[48.71666667,-1.5,{"iconUrl":{"data":"https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-green.png","index":0},"iconWidth":15,"iconHeight":25,"iconAnchorX":7,"iconAnchorY":25},null,null,{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},"<b>Coordinates:<\/b> 48.71666667, -1.5<br><b>Samples at this location:<\/b> 13<br><b>Countries:<\/b> France<br><b>Location:<\/b> St.JeanleThomas;Jullouville<br><b>Sample IDs:<\/b><br>MarFSJ455<br>MarFSJ456<br>MarFSJ457<br>MarFSJ458<br>MarFSJ459<br>MarFSJ460<br>MarFSJ461<br>MarFSJ462<br>MarFSJ463<br>MarFSJ464<br>MarFSJ465<br>MarFSJ466<br>MarFSJ467",null,null,null,"St.JeanleThomas;Jullouville",{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]},{"method":"addMarkers","args":[49.402012,-1.196685,{"iconUrl":{"data":"https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-green.png","index":0},"iconWidth":15,"iconHeight":25,"iconAnchorX":7,"iconAnchorY":25},null,null,{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},"<b>Coordinates:<\/b> 49.402012, -1.196685<br><b>Samples at this location:<\/b> 22<br><b>Countries:<\/b> France<br><b>Location:<\/b> La Vienville, near Sainte-Marie-du-Mont<br><b>Sample IDs:<\/b><br>MarFVi01<br>MarFVi02<br>MarFVi03<br>MarFVi04<br>MarFVi05<br>MarFVi06<br>MarFVi07<br>MarFVi08<br>MarFVi09<br>MarFVi10<br>MarFVi11<br>MarFVi12<br>MarFVi13<br>MarFVi14<br>MarFVi15<br>MarFVi16<br>MarFVi17<br>MarFVi18<br>MarFVi19<br>MarFVi20<br>MarFVi21<br>MarFVi22",null,null,null,"La Vienville, near Sainte-Marie-du-Mont",{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]},{"method":"addMarkers","args":[49.227988,-1.120497,{"iconUrl":{"data":"https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-green.png","index":0},"iconWidth":15,"iconHeight":25,"iconAnchorX":7,"iconAnchorY":25},null,null,{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},"<b>Coordinates:<\/b> 49.227988, -1.120497<br><b>Samples at this location:<\/b> 5<br><b>Countries:<\/b> France<br><b>Location:<\/b> Saint-Fromond<br><b>Sample IDs:<\/b><br>MarFFo01<br>MarFFo02<br>MarFFo03<br>MarFFo04<br>MarFFo05",null,null,null,"Saint-Fromond",{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]},{"method":"addMarkers","args":[49.26666667,-0.433333333,{"iconUrl":{"data":"https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-green.png","index":0},"iconWidth":15,"iconHeight":25,"iconAnchorX":7,"iconAnchorY":25},null,null,{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},"<b>Coordinates:<\/b> 49.26666667, -0.433333333<br><b>Samples at this location:<\/b> 24<br><b>Countries:<\/b> France<br><b>Location:<\/b> Thaon;Caen<br><b>Sample IDs:<\/b><br>MarFTh478<br>MarFTh479<br>MarFTh480<br>MarFTh481<br>MarFTh482<br>MarFTh483<br>MarFTh484<br>MarFTh485<br>MarFTh486<br>MarFTh487<br>MarFTh488<br>MarFTh489<br>MarFTh490<br>MarFTh491<br>MarFTh492<br>MarFTh493<br>MarFTh494<br>MarFTh495<br>MarFTh496<br>MarFTh497<br>MarFTh498<br>MarFTh499<br>MarFTh500<br>MarFTh501",null,null,null,"Thaon;Caen",{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]},{"method":"addMarkers","args":[47.975864,1.68619,{"iconUrl":{"data":"https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-green.png","index":0},"iconWidth":15,"iconHeight":25,"iconAnchorX":7,"iconAnchorY":25},null,null,{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},"<b>Coordinates:<\/b> 47.975864, 1.68619<br><b>Samples at this location:<\/b> 82<br><b>Countries:<\/b> France<br><b>Location:<\/b> Saint-Sigismond45310,Orleans<br><b>Sample IDs:<\/b><br>MarFSi01<br>MarFSi02<br>MarFSi03<br>MarFSi04<br>MarFSi05<br>MarFSi06<br>MarFSi07<br>MarFSi08<br>MarFSi09<br>MarFSi10<br>MarFSi11<br>MarFSi12<br>MarFSi13<br>MarFSi14<br>MarFSi15<br>MarFSi16<br>MarFSi17<br>MarFSi18<br>MarFSi19<br>MarFSi20<br>MarFSi21<br>MarFSi22<br>MarFSi23<br>MarFSi24<br>MarFSi25<br>MarFSi26<br>MarFSi27<br>MarFSi28<br>MarFSi29<br>MarFSi30<br>MarFSi31<br>MarFSi32<br>MarFSi33<br>MarFSi34<br>MarFSi35<br>MarFSi36<br>MarFSi37<br>MarFSi38<br>MarFSi39<br>MarFSi40<br>MarFSi41<br>MarFSi42<br>MarFSi43<br>MarFSi44<br>MarFSi45<br>MarFSi46<br>MarFSi47<br>MarFSi48<br>MarFSi49<br>MarFSi50<br>MarFSi51<br>MarFSi52<br>MarFSi53<br>MarFSi54<br>MarFSi55<br>MarFSi56<br>MarFSi57<br>MarFSi58<br>MarFSi59<br>MarFSi60<br>MarFSi61<br>MarFSi62<br>MarFSi63<br>MarFSi64<br>MarFSi65<br>MarFSi66<br>MarFSi67<br>MarFSi68<br>MarFSi69<br>MarFSi70<br>MarFSi71<br>MarFSi72<br>MarFSi73<br>MarFSi74<br>MarFSi75<br>MarFSi76<br>MarFSi77<br>MarFSi78<br>MarFSi79<br>MarFSi80<br>MarFSi81<br>MarFSi82",null,null,null,"Saint-Sigismond45310,Orleans",{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]},{"method":"addLegend","args":[{"colors":["green","darkblue","orange","darkred"],"labels":["Spain/France/Belgien/Britain","Switzerland/Italy","Russia/Czech/Poland","Other"],"na_color":null,"na_label":"NA","opacity":1,"position":"bottomleft","type":"unknown","title":"Country color","extra":null,"layerId":null,"className":"info legend","group":null}]}],"setView":[[49.2662630610073,10.63402858121168],5,[]],"limits":{"lat":[40.59966,59.323171],"lng":[-5.66137,41.41666667]}},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+
+
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/irarun\.github\.io\/Microtus_arvalis_Project\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

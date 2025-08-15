@@ -1,15 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://irarun.github.io/Microtus_arvalis_Project/map.html</loc>
-    <lastmod>2025-08-14T10:35:43.579Z</lastmod>
+    <loc>https://irarun.github.io/Microtus_arvalis_Project/paper1.html</loc>
+    <lastmod>2025-08-15T12:44:41.000Z</lastmod>
+  </url>
+  <url>
+    <loc>https://irarun.github.io/Microtus_arvalis_Project/index.html</loc>
+    <lastmod>2025-08-13T23:30:39.094Z</lastmod>
   </url>
   <url>
     <loc>https://irarun.github.io/Microtus_arvalis_Project/about.html</loc>
     <lastmod>2025-08-13T23:06:55.485Z</lastmod>
   </url>
   <url>
-    <loc>https://irarun.github.io/Microtus_arvalis_Project/index.html</loc>
-    <lastmod>2025-08-13T23:30:39.094Z</lastmod>
+    <loc>https://irarun.github.io/Microtus_arvalis_Project/map.html</loc>
+    <lastmod>2025-08-15T12:22:30.676Z</lastmod>
   </url>
 </urlset>
