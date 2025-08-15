@@ -1,5 +1,6 @@
 ---
 title: "1st paper"
+format: html
 ---
 
 The map below shows the geographic distribution of samples selected for the first round of sequencing.
@@ -24,7 +25,7 @@ library(tidyverse)
 raw_lines <- readLines("onlyMicrotus_B_MicrotusSamplesV426.txt", encoding = "latin1")
 clean_lines <- iconv(raw_lines, from = "latin1", to = "UTF-8", sub = "")
 writeLines(clean_lines, "onlyMicrotus_B_MicrotusSamplesV426_cleaned.txt")
-rawTable <- read_tsv("onlyMicrotus_B_MicrotusSamplesV426_cleaned.txt")
+rawTable <- read_tsv("onlyMicrotus_B_MicrotusSamplesV426_cleaned.txt", locale = locale(encoding = "UTF-8"))
 
 # Columns to use
 cols <- c("Genus", "Species", "Samplinglocation", "Country", "Sample number (on tube or bag)",
@@ -91,22 +92,12 @@ coords_summary <- arvalis_data %>%
     color = first(Country_group_color),
     has_add_sample = any(Add_marked),
     has_published = any(Published),
-    samples_info = list(
-      tibble(
-        sample_name = `Individual number`,
-        Frozen_body = `Specimen-20`
-      )
-    ),
+    sample_names = list(`Individual number`),
     .groups = "drop"
   ) %>%
   rowwise() %>%
   mutate(
-    samples_colored = paste(
-      sapply(1:nrow(samples_info), function(i) {
-        color_sample_name(samples_info$sample_name[i], samples_info$Frozen_body[i])
-      }),
-      collapse = "<br>"
-    )
+    samples_colored = paste(sample_names, collapse = "<br>")
   ) %>%
   ungroup()
 
@@ -218,6 +209,7 @@ clean_lines <- iconv(raw_lines, from = "latin1", to = "UTF-8", sub = "")
 writeLines(clean_lines, "onlyMicrotus_B_MicrotusSamplesV426_cleaned.txt")
 rawTable <- read_tsv("onlyMicrotus_B_MicrotusSamplesV426_cleaned.txt")
 
+
 # Columns to use
 cols <- c("Genus", "Species", "Samplinglocation", "Country", "Sample number (on tube or bag)",
           "Individual number", "Extraction y/n?", "Place of capture", "Latitude", "Longitude",
@@ -284,22 +276,12 @@ coords_summary <- arvalis_data %>%
     color = first(Country_group_color),
     has_add_sample = any(Add_marked),
     has_published = any(Published),
-    samples_info = list(
-      tibble(
-        sample_name = `Individual number`,
-        Frozen_body = `Specimen-20`
-      )
-    ),
+    sample_names = list(`Individual number`),
     .groups = "drop"
   ) %>%
   rowwise() %>%
   mutate(
-    samples_colored = paste(
-      sapply(1:nrow(samples_info), function(i) {
-        color_sample_name(samples_info$sample_name[i], samples_info$Frozen_body[i])
-      }),
-      collapse = "<br>"
-    )
+    samples_colored = paste(sample_names, collapse = "<br>")
   ) %>%
   ungroup()
 
