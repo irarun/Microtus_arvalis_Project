@@ -175,7 +175,7 @@ map <- map %>%
   addLegend(
     position = "bottomleft",
     colors = c("green", "darkblue", "orange", "darkred"),
-    labels = c("Spain/France/Belgien/Britain", "Switzerland/Italy", "Russia/Czech/Poland", "Other"),
+    labels = c("Western", "Italian", "Eastern", "Central"),
     title = "Country color",
     opacity = 1
   )
@@ -359,8 +359,7 @@ map <- map %>%
   addLegend(
     position = "bottomleft",
     colors = c("green", "darkblue", "orange", "darkred"),
-    labels = c("Spain/France/Belgien/Britain", "Switzerland/Italy", "Russia/Czech/Poland", "Other"),
-    title = "Country color",
+    labels = c("Western", "Italian", "Eastern", "Central"),
     opacity = 1
   )
 ```
